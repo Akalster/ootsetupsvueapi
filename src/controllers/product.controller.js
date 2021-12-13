@@ -1,7 +1,7 @@
 const Product = require('../models/product.model')() // note we need to call the model caching function
 const User = require('../models/user.model')() // note we need to call the model caching function
 
-const neo = require('../../neo')
+
 
 const errors = require('../errors')
 
@@ -25,17 +25,7 @@ async function purchase(req, res) {
     user.bought.push(product._id)
     await user.save()
 
-    // open a neo session
-    const session = neo.session()
-
-    // store the purchase in neo
-    await session.run(neo.purchase, {
-        productId: product._id.toString(),
-        userId: user._id.toString(),
-    })
-
-    // close the neo session
-    session.close()
+  
 
     res.status(201).end()
 }
