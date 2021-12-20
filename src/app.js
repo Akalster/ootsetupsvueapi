@@ -31,12 +31,11 @@ app.use(helmet());
 app.use(morgan("dev"));
 
 const userRoutes = require("./routes/user.routes");
-const productRoutes = require("./routes/product.routes");
+
 
 const errors = require("./errors");
 
 app.use("/user", userRoutes);
-app.use("/product", productRoutes);
 
 // catch all not found response
 app.use("*", function(_, res) {
