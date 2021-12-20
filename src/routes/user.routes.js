@@ -7,10 +7,6 @@ const CrudController = require('../controllers/crud')
 
 const UserCrudController = new CrudController(User)
 
-
-// create a user
-router.post('/', UserCrudController.create)
-
 // get all users
 router.get('/', UserCrudController.getAll)
 

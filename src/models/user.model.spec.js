@@ -8,21 +8,111 @@ const User = require('./user.model')() // note we need to call the model caching
 
 describe('user model', function() {
     describe('unit tests', function() {
-        it('should reject a missing user name', async function() {
-            const user = new User({})
+        it('should create an user', async function() {
+            const testUser = {
+                firstname: "Test",
+                lastname: "Tester", 
+                team: "Oranje", 
+                email: "test@test.nl", 
+                password: "secret"
+            }
+
+            const user = await new User(testUser).save()
+    
+            expect(user).to.have.property('firstname', testUser.firstname)
+            expect(user).to.have.property('lastname', testUser.lastname)
+            expect(user).to.have.property('team', testUser.team)
+            expect(user).to.have.property('email', testUser.email)
+            expect(user).to.have.property('password', testUser.password)
+        })
+
+        it('should reject a missing user firstname', async function() {
+            const testUser = {
+                lastname: "Tester", 
+                team: "Oranje", 
+                email: "test@test.nl", 
+                password: "secret"
+            }
+            
+            const user = new User(testUser)
     
             await expect(user.save()).to.be.rejectedWith(Error)
         })
+
+        it('should reject a missing user lastname', async function() {
+            const testUser = {
+                firstname: "Test",
+                team: "Oranje", 
+                email: "test@test.nl", 
+                password: "secret"
+            }
+            
+            const user = new User(testUser)
     
-        it('should create an empty bought list by default', async function() {
-            const user = await new User({name: 'Jane'}).save()
-    
-            expect(user).to.have.property('bought').and.to.be.empty
+            await expect(user.save()).to.be.rejectedWith(Error)
         })
+
+        it('should reject a missing user team', async function() {
+            const testUser = {
+                firstname: "Test",
+                lastname: "Tester", 
+                email: "test@test.nl", 
+                password: "secret"
+            }
+            
+            const user = new User(testUser)
     
-        it('should not create duplicate user names', async function() {
-            await new User({name: 'Joe'}).save()
-            const user = new User({name: 'Joe'})
+            await expect(user.save()).to.be.rejectedWith(Error)
+        })
+
+        it('should reject a missing user email', async function() {
+            const testUser = {
+                firstname: "Test",
+                lastname: "Tester", 
+                team: "Oranje",  
+                password: "secret"
+            }
+            
+            const user = new User(testUser)
+    
+            await expect(user.save()).to.be.rejectedWith(Error)
+        })
+
+        it('should reject a missing user password', async function() {
+            const testUser = {
+                firstname: "Test",
+                lastname: "Tester", 
+                team: "Oranje", 
+                email: "test@test.nl", 
+            }
+            
+            const user = new User(testUser)
+    
+            await expect(user.save()).to.be.rejectedWith(Error)
+        })
+
+    
+    
+        it('should not create duplicate emails', async function() {
+            const testUser1 = {
+                firstname: "Test",
+                lastname: "Tester", 
+                team: "Oranje", 
+                email: "test@test.nl", 
+                password: "secret"
+            }
+
+            const testUser2 = {
+                firstname: "Anders",
+                lastname: "Probeerder", 
+                team: "Blauw", 
+                email: testUser1.email, 
+                password: "secreter"
+            }
+
+            await new User(testUser1).save()
+
+            const user = new User(testUser2)
             
             await expect(user.save()).to.be.rejectedWith(Error)
     
