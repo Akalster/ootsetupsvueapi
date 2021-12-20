@@ -1,5 +1,5 @@
 const express = require("express");
-
+const jwt = require("../jwt")
 // this catches an exception in a route handler and calls next with it,
 // so express' error middleware can deal with it
 // saves us a try catch in each route handler
@@ -30,12 +30,15 @@ app.use(helmet());
 // use morgan for logging
 app.use(morgan("dev"));
 
+const authRoutes = require("./routes/auth.routes")
 const userRoutes = require("./routes/user.routes");
 
 
 const errors = require("./errors");
 
-app.use("/user", userRoutes);
+app.use("/api", authRoutes);
+app.use(jwt());
+app.use("/api/user", userRoutes);
 
 // catch all not found response
 app.use("*", function(_, res) {
