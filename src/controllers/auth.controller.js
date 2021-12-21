@@ -47,11 +47,18 @@ async function login(req, res) {
     const check = await bcrypt.compareSync(userProps.password, user.password);
 
     if (user && check) {
-      const token = jwt.sign({ id: user._id }, "secret", {
+      const token = jwt.sign({ id: user._id, firstName: user.firstname, lastName: user.lastname, email: user.email, team: user.team }, "secret", {
         expiresIn: "7d"
       });
       user.token = token;
-      res.status(201).send(user);
+
+      var expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 7);
+
+      res.status(201).send({ 
+        token: user.token,
+        expirationDate: expirationDate
+      });
     } else if(user && !check){
       throw new errors.EntityNotFoundError('The password was incorrect.')
     }
