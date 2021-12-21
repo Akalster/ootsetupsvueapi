@@ -5,9 +5,11 @@ const getModel = require('./model_cache');
 
 const ReviewSchema = new Schema({
     createdBy: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "users",
+        index: true,
+        required: [true, "A Activity needs a valid user id"]
     },
-
     title: {
         type: String,
         required: [true, 'A review needs to have a title.'],
