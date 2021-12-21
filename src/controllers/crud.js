@@ -12,6 +12,7 @@ class CrudController {
     // lexical scope for 'this'
     create = async (req, res, next) => {
         const entity = new this.model(req.body)
+        entity.createdBy = req.user.id; 
         await entity.save()
         res.status(201).json({id: entity.id})
     }
@@ -28,6 +29,7 @@ class CrudController {
 
     update = async (req, res, next) => {
         await this.model.findByIdAndUpdate(req.params.id, req.body)
+        
         res.status(204).end()
     }
 
