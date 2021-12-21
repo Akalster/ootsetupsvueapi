@@ -19,6 +19,12 @@ const QuestionSchema = new Schema({
     answers: {
         type: [AnswerSchema],
         required: [true, 'A question needs to have a list of answers.'],
+    },
+
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: [true, 'A question needs to be created by a user.']
     }
 });
 
