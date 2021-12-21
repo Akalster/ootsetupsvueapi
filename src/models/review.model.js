@@ -4,9 +4,8 @@ const Schema = mongoose.Schema;
 const getModel = require('./model_cache');
 
 const ReviewSchema = new Schema({
-    userkey: {
+    createdBy: {
         type: String,
-        required: [true, 'A review needs to have a userkey.'],
     },
 
     title: {
@@ -21,7 +20,7 @@ const ReviewSchema = new Schema({
 
     postdate: {
         type: Date,
-        required: [true, 'A review needs to have a postdate.'],
+        default: Date.now(),
     },
 });
 
