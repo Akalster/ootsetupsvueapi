@@ -40,14 +40,20 @@ async function login(req, res) {
     const userProps = req.body;
     const user = await User.findOne({ email: userProps.email });
 
-    if (user && bcrypt.compareSync(userProps.password, user.password)) {
+    if(!user){
+      throw new errors.EntityNotFoundError('There is no account registered under this e-mail.')
+    }
+
+    const check = await bcrypt.compareSync(userProps.password, user.password);
+
+    if (user && check) {
       const token = jwt.sign({ id: user._id }, "secret", {
         expiresIn: "7d"
       });
       user.token = token;
       res.status(201).send(user);
-    } else {
-        throw new errors.EntityNotFoundError('There is no account with registerd email')
+    } else if(user && !check){
+      throw new errors.EntityNotFoundError('The password was incorrect.')
     }
 }
 
