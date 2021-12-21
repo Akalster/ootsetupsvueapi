@@ -4,30 +4,9 @@ const Schema = mongoose.Schema;
 const getModel = require('./model_cache');
 
 const ReviewSchema = new Schema({
-    reviewkey: {
+    userkey: {
         type: String,
-        required: [true, 'A review need to have a reviewkey'],
-        unique: [true, 'A review needs to have a unique email'],
-    },
-
-    userfirstname: {
-        type: String,
-        required: [true, 'A review needs to have a userfirstname.'],
-    },
-
-    userlastname: {
-        type: String,
-        required: [true, 'A review needs to have a userlastname.'],
-    },
-
-    userteam: {
-        type: String,
-        required: [true, 'A review needs to have a userteam.'],
-    },
-
-    useremail: {
-        type: String,
-        required: [true, 'A review needs to have a useremail.'],
+        required: [true, 'A review needs to have a userkey.'],
     },
 
     title: {
