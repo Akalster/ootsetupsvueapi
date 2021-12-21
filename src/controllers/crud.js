@@ -13,7 +13,6 @@ class CrudController {
     create = async (req, res, next) => {
         const entity = new this.model(req.body);
         entity.createdBy = req.user.id;
-        console.log(entity);
         await entity.save();
         res.status(201).json({ id: entity.id, userid: entity.createdBy });
     };
