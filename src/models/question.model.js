@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const AnswerSchema = require('./answer.model');
 
 const getModel = require('./model_cache');
 
@@ -16,9 +17,8 @@ const QuestionSchema = new Schema({
         required: [true, 'A question needs to have a type.'],
     },
 
-    answers: {
-        type: [AnswerSchema],
-        required: [true, 'A question needs to have a list of answers.'],
+    answers:{
+        type:[AnswerSchema.AnswerSchema]
     },
 
     createdBy: {

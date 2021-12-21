@@ -33,6 +33,8 @@ app.use(morgan('dev'));
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 const reviewRoutes = require('./routes/review.routes');
+const questionRoutes = require('./routes/question.routes');
+const answerRoutes = require('./routes/answer.routes');
 
 const errors = require('./errors');
 
@@ -40,6 +42,8 @@ app.use('/api', authRoutes);
 app.use(jwt());
 app.use('/api/review', reviewRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/question', questionRoutes);
+app.use('/api/answer', answerRoutes);
 
 // catch all not found response
 app.use('*', function (_, res) {
