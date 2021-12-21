@@ -1,7 +1,7 @@
 // reads the .env file and stores it as environment variables, use for config
 require('dotenv').config();
 
-const localconnect = require('./localconnect');
+const localconnect = require('./connect');
 
 //IMPORT MODELS HERE
 
