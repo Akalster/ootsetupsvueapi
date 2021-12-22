@@ -11,6 +11,11 @@ const QuestionSchema = new Schema({
         required: [true, 'A question needs to have a reviewkey.'],
     },
 
+    content: {
+        type: String,
+        required: [true, 'A question needs to have content.']
+    },
+
     //Open voor verandering, bespreken met iedereen.
     type: {
         type: String,
