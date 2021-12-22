@@ -1,6 +1,7 @@
 // this contains all basic CRUD endpoints on a schema
 
 const errors = require('../errors');
+const bcrypt = require("bcryptjs");
 
 // the schema is supplied by injection
 class CrudController {
@@ -28,6 +29,9 @@ class CrudController {
     };
 
     update = async (req, res, next) => {
+        if(req.body.password){
+            req.body.password = bcrypt.hashSync(req.body.password, 10);
+        }
         await this.model.findByIdAndUpdate(req.params.id, req.body);
         res.status(204).end();
     };
