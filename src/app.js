@@ -40,9 +40,9 @@ const errors = require('./errors');
 
 app.use('/api', authRoutes);
 app.use(jwt());
-app.use('/api/review', reviewRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/question', questionRoutes);
+app.use('/api/review', reviewRoutes);
+app.use('/api', questionRoutes);
 app.use('/api/answer', answerRoutes);
 
 // catch all not found response

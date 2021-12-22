@@ -5,6 +5,8 @@ const Question = require('../models/question.model')(); // note we need to call 
 
 const CrudController = require('../controllers/crud');
 
+const QuestionController = require("../controllers/question.controller")
+
 const QuestionCrudController = new CrudController(Question);
 
 // get all reviews
@@ -14,12 +16,12 @@ router.get('/', QuestionCrudController.getAll);
 router.get('/:id', QuestionCrudController.getOne);
 
 // add a review
-router.post('/:reviewid', QuestionCrudController.create);
+router.post('/review/:reviewId/question', QuestionController.create);
 
 // update a review
-router.put('/:id', QuestionCrudController.update);
+router.put('/review/:reviewId/question/:questionId', QuestionController.update);
 
 // remove a review
-router.delete('/:id', QuestionCrudController.delete);
+router.delete('/review/:reviewId/question/:questionId', QuestionController.remove);
 
 module.exports = router;
