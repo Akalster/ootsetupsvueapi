@@ -17,19 +17,29 @@ async function update(req, res) {
     const reviewId = req.params.reviewId;
     const questionId = req.params.questionId;
     const questionProps = req.body;
+    const entity = await Question.findById(questionId);
 
+    if (entity.createdBy.valueOf() == req.user.id) {
+        await Question.findByIdAndUpdate(questionId, questionProps)
+        res.status(204).end();
+    }else{
+        res.status(401).send({message: "Not authorized!"})
+    }
     
-    await Question.findByIdAndUpdate(questionId, questionProps)
-    res.status(204).end();
+    
 }
 
 async function remove(req, res) {
     const reviewId = req.params.reviewId;
     const questionId = req.params.questionId;
+    const entity = await Question.findById(questionId);
 
-    
-    await Question.findByIdAndDelete(questionId); 
-    res.status(204).end();
+    if (entity.createdBy.valueOf() == req.user.id) {
+        await Question.findByIdAndDelete(questionId); 
+        res.status(204).end();
+    }else{
+        res.status(401).send({message: "Not authorized!"})
+    }
 }
 
 module.exports = {
