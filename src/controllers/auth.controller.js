@@ -22,7 +22,7 @@ async function login(req, res) {
       throw new errors.EntityNotFoundError('There is no account registered under this e-mail.')
     }
 
-    const check = await bcrypt.compareSync(userProps.password, user.password);
+    const check = await bcrypt.compare(userProps.password, user.password);
 
     if (user && check) {
       const token = jwt.sign({ id: user._id, firstName: user.firstname, lastName: user.lastname, email: user.email, team: user.team }, "secret", {
