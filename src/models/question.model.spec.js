@@ -1,68 +1,108 @@
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
-//Dit is de route test
+const chai = require('chai')
+const expect = chai.expect
 
-// const chai = require('chai')
-// const expect = chai.expect
+var chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
 
-// var chaiAsPromised = require("chai-as-promised");
-// const { beforeEach } = require('mocha');
-// chai.use(chaiAsPromised);
+const Question = require('./question.model')(); // note we need to call the model caching function
+const Review = require('./review.model')(); // required for the reviewkey of question 
+const User = require('./user.model')(); // required for the bearer token to make requests
 
-// const requester = require('../../requester.spec')
-// const Question = require('./question.model')() // note we need to call the model caching function
-// const Review = require('./review.model')() // required for the reviewkey of question 
-// const User = require('./user.model') // required for the bearer token to make requests
+describe('question model', function () {
+    describe('unit tests', function () {
+        it('should create a question', async function () {
 
-// describe('question model', function() {
-//     describe('unit tests', function() {
-//         beforeEach(function() {
-//             db.clear(function(err) {
-//                 if (err) return done(err);
-//             })
+            const user = await new User({
+                firstname: "Test",
+                lastname: "Tester", 
+                team: "Oranje", 
+                email: "test@test.nl", 
+                password: "secret"
+            });
+            
+            const review = await new Review({
+                createdBy: user._id, 
+                title: 'Hoe testerig ben ik?',
+                open: true,
+            });
 
-//             await requester.post("/api/register").send({
-//                 firstname: "Test",
-//                 lastname: "Tester", 
-//                 team: "Oranje", 
-//                 email: "test@test.nl", 
-//                 password: "secret"
-//             });
+            const question = new Question({
+                reviewkey: review._id,
+                type: "Open",
+                createdBy: user._id
+            });
 
-//             const userresult = await requester.post("/api/login").send({
-//                 email: "test@test.nl",
-//                 password: "secret"
-//             })
+            await expect(question.save()).to.be.ok;
+        });
 
-//             const token = userresult.body.token;
+        it('should reject a missing reviewkey', async function () {
 
-//             await requester.post("/api/review").send({
-//                 createdBy: userresult.body._id,
-//                 title: "TestReview",
-//                 open: true,
-//                 postdate: "2012-08-23T18:25:43.511Z"
-//             });
+            const user = await new User({
+                firstname: "Test",
+                lastname: "Tester", 
+                team: "Oranje", 
+                email: "test@test.nl", 
+                password: "secret"
+            });
 
-//             const reviewresult = await requester.post("/api/review").send({
+            const testQuestion = {
+                type: "Open",
+                createdBy: user._id
+            };
 
-//             })
+            const question = new Question(testQuestion);
 
-//             const testReview = {
+            await expect(question.save()).to.be.rejectedWith(Error);
+        });
 
-//             }
-//         })
-//     })
-// })
+        it('should reject a missing question type', async function () {
+            const user = await new User({
+                firstname: "Test",
+                lastname: "Tester", 
+                team: "Oranje", 
+                email: "test@test.nl", 
+                password: "secret"
+            });
+
+            const review = await new Review({
+                createdBy: user._id, 
+                title: 'Hoe testerig ben ik?',
+                open: true,
+            });
+
+            const testQuestion = {
+                reviewkey: review._id,
+                createdBy: user._id
+            };
+
+            const question = new Question(testQuestion);
+
+            await expect(question.save()).to.be.rejectedWith(Error);
+        });
+
+        it('should reject a missing createdBy', async function () {
+            const user = await new User({
+                firstname: "Test",
+                lastname: "Tester", 
+                team: "Oranje", 
+                email: "test@test.nl", 
+                password: "secret"
+            });
+
+            const review = await new Review({
+                createdBy: user._id, 
+                title: 'Hoe testerig ben ik?',
+                open: true,
+            });
+
+            const testQuestion = {
+                reviewkey: review._id,
+                type: "Open"
+            };
+
+            const question = new Question(testQuestion);
+
+            await expect(question.save()).to.be.rejectedWith(Error);
+        });
+    });
+});
