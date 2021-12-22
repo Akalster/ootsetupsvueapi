@@ -10,10 +10,10 @@ const QuestionSchema = new Schema({
         ref: 'review',
         required: [true, 'A question needs to have a reviewkey.'],
     },
-    
+
     content: {
-        type: String, 
-        required: [true, 'A question needs to have a question.'],
+        type: String,
+        required: [true, 'A question needs to have content.']
     },
 
     //Open voor verandering, bespreken met iedereen.
