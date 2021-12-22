@@ -14,7 +14,7 @@ router.get('/', QuestionCrudController.getAll);
 router.get('/:id', QuestionCrudController.getOne);
 
 // add a review
-router.post('/', QuestionCrudController.create);
+router.post('/:reviewid', QuestionCrudController.create);
 
 // update a review
 router.put('/:id', QuestionCrudController.update);

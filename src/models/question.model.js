@@ -17,6 +17,7 @@ const QuestionSchema = new Schema({
         required: [true, 'A question needs to have a type.'],
     },
 
+    //Deze moet niet in een post request maar wordt later wel aangepast om dingen toe te voegen.
     answers:{
         type:[AnswerSchema.AnswerSchema]
     },
