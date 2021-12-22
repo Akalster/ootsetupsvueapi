@@ -10,10 +10,10 @@ const QuestionController = require("../controllers/question.controller")
 const QuestionCrudController = new CrudController(Question);
 
 // get all reviews
-router.get('/', QuestionCrudController.getAll);
+router.get('/question', QuestionCrudController.getAll);
 
 // get a review
-router.get('/:id', QuestionCrudController.getOne);
+router.get('/question/:id', QuestionCrudController.getOne);
 
 // add a review
 router.post('/review/:reviewId/question', QuestionController.create);

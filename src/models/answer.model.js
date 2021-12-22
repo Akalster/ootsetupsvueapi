@@ -17,6 +17,12 @@ const AnswerSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user',
         required: [true, 'An answer needs to be made by a user.'],
+    },
+
+    questionId: {
+        type: Schema.Types.ObjectId,
+        ref: 'question',
+        required: [true, 'An answer needs to be made for a question.']
     }
 });
 
