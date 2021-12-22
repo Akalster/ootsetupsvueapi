@@ -7,7 +7,7 @@ const { Connection } = require('mongoose');
 chai.use(chaiAsPromised);
 
 const requester = require('../../requester.spec')
-const Question = require('../routes/question.routes') // note we need to call the model caching function
+const Question = require('../models/question.model')() // note we need to call the model caching function
 const Review = require('../routes/review.routes') // required for the reviewkey of question 
 const User = require('../routes/user.routes') // required for the bearer token to make requests
 
@@ -30,28 +30,27 @@ describe('question routes', function() {
             const jwt = userresult.body.token;
 
             const reviewresult = await requester.post("/api/review").set({ Authorization: `Bearer ${jwt}` }).send({
-                createdBy: userresult.body._id,
                 title: "TestReview",
                 open: true,
-                postdate: "2012-08-23T18:25:43.511Z"
             });
 
-            const reviewid = reviewresult.body._id;
+            const reviewid = reviewresult.body.id;
 
             const testQuestion = {
-                reviewkey: reviewid,
                 type: "Open",
-                createdBy: userresult.body._id
+                content: "Diego's vraag"
             }
 
-            const res = await requester.post('/api/question/' + reviewid).set({ Authorization: `Bearer ${jwt}` }).send(testQuestion)
+            const res = await requester.post('/api/review/' + reviewid + "/question").set({ Authorization: `Bearer ${jwt}` }).send(testQuestion)
+            console.log(res.body)
             expect(res).to.have.status(201)
             expect(res.body).to.have.property('_id')
 
             const question = await Question.findOne({_id: res.body._id})
-            expect(question).to.have.property('reviewkey', testQuestion.reviewkey)
+    
+
             expect(question).to.have.property('type', testQuestion.type)
-            expect(question).to.have.property('createdBy', testQuestion.createdBy)
+            expect(question).to.have.property('content', testQuestion.content)
 
         })
     })
