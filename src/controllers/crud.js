@@ -29,18 +29,28 @@ class CrudController {
     };
 
     update = async (req, res, next) => {
-        if(req.body.password){
-            req.body.password = bcrypt.hashSync(req.body.password, 10);
-        }
-        await this.model.findByIdAndUpdate(req.params.id, req.body);
-        res.status(204).end();
+        const entity = await this.model.findById(req.params.id);
+
+        if (entity._id.valueOf() == req.user.id || entity.createdBy.valueOf() == req.user.id) {
+            if(req.body.password){
+                req.body.password = bcrypt.hashSync(req.body.password, 10);
+            }
+            await this.model.findByIdAndUpdate(req.params.id, req.body);
+            res.status(204).end();
+        }else{
+            res.status(401).send({message: "Not authorized!"})
+        }        
     };
 
     delete = async (req, res, next) => {
-        // this happens in two steps to make mongoose middleware run
         const entity = await this.model.findById(req.params.id);
-        await entity.delete();
-        res.status(204).end();
+        // this happens in two steps to make mongoose middleware run
+        if (entity._id.valueOf() == req.user.id || entity.createdBy.valueOf() == req.user.id) {
+            await entity.delete();
+            res.status(204).end();
+        }else{
+            res.status(401).send({message: "Not authorized!"})
+        }
     };
 }
 
