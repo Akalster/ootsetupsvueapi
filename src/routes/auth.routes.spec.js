@@ -16,7 +16,7 @@ describe('authentication endpoints', function() {
                 email: "test@test.nl", 
                 password: "secret"
             }
-    
+            
             const res = await requester.post('/api/register').send(testUser)
             expect(res).to.have.status(201)
             expect(res.body).to.have.property('_id')

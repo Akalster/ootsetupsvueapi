@@ -15,28 +15,6 @@ async function register(req, res) {
 }
 
 async function login(req, res) {
-    // // check whether request is valid
-    // if(!req.body.user) {
-    //     throw new errors.EntityNotFoundError('User is required to purchase a product')
-    // }
-
-    // // get the product from the db and check whether we have such a product
-    // const product = await Product.findById(req.params.id)
-    // if(!product) {
-    //     throw new errors.EntityNotFoundError(`Product with id '${req.params.id}' not found`)
-    // }
-
-    // // add the product to the bought list of the user
-    // const user = await User.findOne({name: req.body.user})
-
-    // // maybe not necessary any more now that we store it in neo?
-    // // BEWARE: atomicity issues!
-    // user.bought.push(product._id)
-    // await user.save()
-
-  
-
-    // res.status(201).end()
     const userProps = req.body;
     const user = await User.findOne({ email: userProps.email });
 
@@ -44,7 +22,7 @@ async function login(req, res) {
       throw new errors.EntityNotFoundError('There is no account registered under this e-mail.')
     }
 
-    const check = await bcrypt.compareSync(userProps.password, user.password);
+    const check = await bcrypt.compare(userProps.password, user.password);
 
     if (user && check) {
       const token = jwt.sign({ id: user._id, firstName: user.firstname, lastName: user.lastname, email: user.email, team: user.team }, "secret", {

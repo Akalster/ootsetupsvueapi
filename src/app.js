@@ -1,17 +1,17 @@
-const express = require("express");
-const jwt = require("../jwt")
+const express = require('express');
+const jwt = require('../jwt');
 // this catches an exception in a route handler and calls next with it,
 // so express' error middleware can deal with it
 // saves us a try catch in each route handler
 // note: this will be standard in express 5.0, to be released soon
-require("express-async-errors");
+require('express-async-errors');
 
 const app = express();
 
-const cors = require("cors");
-const helmet = require("helmet");
+const cors = require('cors');
+const helmet = require('helmet');
 
-const morgan = require("morgan");
+const morgan = require('morgan');
 
 // parse json body of incoming request
 app.use(express.json());
@@ -28,36 +28,41 @@ app.use(cors());
 app.use(helmet());
 
 // use morgan for logging
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 
-const authRoutes = require("./routes/auth.routes")
-const userRoutes = require("./routes/user.routes");
+const authRoutes = require('./routes/auth.routes');
+const userRoutes = require('./routes/user.routes');
+const reviewRoutes = require('./routes/review.routes');
+const questionRoutes = require('./routes/question.routes');
+const answerRoutes = require('./routes/answer.routes');
 
+const errors = require('./errors');
 
-const errors = require("./errors");
-
-app.use("/api", authRoutes);
+app.use('/api', authRoutes);
 app.use(jwt());
-app.use("/api/user", userRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/review', reviewRoutes);
+app.use('/api', questionRoutes);
+app.use('/api/answer', answerRoutes);
 
 // catch all not found response
-app.use("*", function(_, res) {
-  res.status(404).end();
+app.use('*', function (_, res) {
+    res.status(404).end();
 });
 
 // error responses
-app.use("*", function(err, req, res, next) {
-  console.error(`${err.name}: ${err.message}`);
-  // console.error(err)
-  next(err);
+app.use('*', function (err, req, res, next) {
+    console.error(`${err.name}: ${err.message}`);
+    // console.error(err)
+    next(err);
 });
 
-app.use("*", errors.handlers);
+app.use('*', errors.handlers);
 
-app.use("*", function(err, req, res, next) {
-  res.status(500).json({
-    message: "something really unexpected happened"
-  });
+app.use('*', function (err, req, res, next) {
+    res.status(500).json({
+        message: 'something really unexpected happened',
+    });
 });
 
 // export the app object for use elsewhere
