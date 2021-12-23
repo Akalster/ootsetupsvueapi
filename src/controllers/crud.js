@@ -15,7 +15,7 @@ class CrudController {
         const entity = new this.model(req.body);
         entity.createdBy = req.user.id;
         await entity.save();
-        res.status(201).json({ id: entity.id, userid: entity.createdBy });
+        res.status(201).send(entity);
     };
 
     getAll = async (req, res, next) => {
@@ -39,7 +39,8 @@ class CrudController {
             res.status(204).end();
         }else{
             res.status(401).send({message: "Not authorized!"})
-        }        
+        }      
+
     };
 
     delete = async (req, res, next) => {
@@ -51,6 +52,7 @@ class CrudController {
         }else{
             res.status(401).send({message: "Not authorized!"})
         }
+
     };
 }
 

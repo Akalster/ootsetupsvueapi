@@ -29,6 +29,7 @@ describe('question model', function () {
             const question = new Question({
                 reviewkey: review._id,
                 type: "Open",
+                content: "Goeie vraag",  
                 createdBy: user._id
             });
 
