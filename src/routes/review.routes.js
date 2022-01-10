@@ -12,11 +12,11 @@ const ReviewCrudController = new CrudController(Review);
 // get all reviews
 router.get('/', ReviewCrudController.getAll);
 
-// get a review
-router.get('/:id', ReviewCrudController.getOne);
-
 // get all open reviews
 router.get('/open', ReviewController.getOpen);
+
+// get a review
+router.get('/:id', ReviewCrudController.getOne);
 
 // add a review
 router.post('/', ReviewCrudController.create);
