@@ -28,12 +28,6 @@ const ScaleAnswerSchema = new Schema({
         type: String,
         required: [true, 'An scale answer needs to have scales.'],
     },
-
-    answeredBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-        required: [true, 'An answer needs to be made by a user.'],
-    },
     
     createdBy: {
         type: Schema.Types.ObjectId,

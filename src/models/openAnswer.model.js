@@ -9,12 +9,6 @@ const OpenAnswerSchema = new Schema({
         required: [true, 'An open answer needs to have content.'],
     },
 
-    answeredBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-        required: [true, 'An answer needs to be made by a user.'],
-    },
-    
     createdBy: {
         type: Schema.Types.ObjectId,
         ref: 'user',

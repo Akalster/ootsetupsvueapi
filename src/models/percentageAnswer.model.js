@@ -13,12 +13,6 @@ const OpenAnswerSchema = new Schema({
         type: Number, 
         required: [true, 'An open answer needs to have percentage.'],
     },
-
-    answeredBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-        required: [true, 'An answer needs to be made by a user.'],
-    },
     
     createdBy: {
         type: Schema.Types.ObjectId,
