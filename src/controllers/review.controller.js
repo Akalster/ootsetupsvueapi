@@ -5,6 +5,12 @@ async function getOpen(req, res) {
     res.status(200).send(reviews);
 }
 
+async function getMyReviews(req, res) {
+    const reviews = await Review.find({ createdBy: req.params.id});
+    res.status(200).send(reviews);
+}
+
 module.exports = {
-    getOpen
+    getOpen,
+    getMyReviews
 }
