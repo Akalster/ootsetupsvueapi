@@ -35,6 +35,7 @@ const userRoutes = require('./routes/user.routes');
 const reviewRoutes = require('./routes/review.routes');
 const questionRoutes = require('./routes/question.routes');
 const answerRoutes = require('./routes/answer.routes');
+const teamRoutes = require('./routes/team.routes');
 
 const errors = require('./errors');
 
@@ -44,6 +45,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/review', reviewRoutes);
 app.use('/api', questionRoutes);
 app.use('/api/answer', answerRoutes);
+app.use('/api/team', teamRoutes)
 
 // catch all not found response
 app.use('*', function (_, res) {
