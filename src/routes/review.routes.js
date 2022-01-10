@@ -15,6 +15,9 @@ router.get('/', ReviewCrudController.getAll);
 // get all open reviews
 router.get('/open', ReviewController.getOpen);
 
+// get all my reviews
+router.get('/user/:id', ReviewController.getMyReviews);
+
 // get a review
 router.get('/:id', ReviewCrudController.getOne);
 
