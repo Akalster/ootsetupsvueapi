@@ -5,10 +5,15 @@ const Review = require('../models/review.model')(); // note we need to call the 
 
 const CrudController = require('../controllers/crud');
 
+const ReviewController = require('../controllers/review.controller');
+
 const ReviewCrudController = new CrudController(Review);
 
 // get all reviews
 router.get('/', ReviewCrudController.getAll);
+
+// get all open reviews
+router.get('/open', ReviewController.getOpen);
 
 // get a review
 router.get('/:id', ReviewCrudController.getOne);
