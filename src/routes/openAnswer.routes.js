@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const Answer = require('../models/answer.model')(); // note we need to call the model caching function
+const OpenAnswer = require('../models/openAnswer.model')(); // note we need to call the model caching function
 
 const CrudController = require('../controllers/crud');
 
-const AnswerCrudController = new CrudController(Answer);
+const AnswerCrudController = new CrudController(OpenAnswer);
 
 // get all reviews
 router.get('/', AnswerCrudController.getAll);
