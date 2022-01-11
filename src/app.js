@@ -34,7 +34,7 @@ const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 const reviewRoutes = require('./routes/review.routes');
 const questionRoutes = require('./routes/question.routes');
-const answerRoutes = require('./routes/openAnswer.routes');
+const answerRoutes = require('./routes/answer.routes');
 
 const errors = require('./errors');
 
