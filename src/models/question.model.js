@@ -16,16 +16,36 @@ const QuestionSchema = new Schema({
         required: [true, 'A question needs to have content.']
     },
 
+    option1: {
+        type: String,
+    },
+
+    option2: {
+        type: String,
+    },
+
+    option3: {
+        type: String,
+    },
+
+    option4: {
+        type: String,
+    },
+
+    option5: {
+        type: String,
+    },
+
+    option6: {
+        type: String,
+    },
+
     //Open voor verandering, bespreken met iedereen.
     type: {
         type: String,
+        enum: ['open', 'multipilechoice', 'percentage', 'scale'],
         required: [true, 'A question needs to have a type.'],
-    },
-
-    //Deze moet niet in een post request maar wordt later wel aangepast om dingen toe te voegen.
-    answers:{
-        type:[AnswerSchema.AnswerSchema]
-    },
+    }, 
 
     createdBy: {
         type: Schema.Types.ObjectId,

@@ -4,31 +4,10 @@ const Schema = mongoose.Schema;
 const getModel = require('./model_cache');
 
 const MultipileChoiceAnswerSchema = new Schema({
-    contentA: {
-        type: String,
-        required: [true, 'An multipile answer needs to have answers.'],
-    },
-
-    contentB: {
-        type: String,
-        required: [true, 'An multipile answer needs to have answers.'],
-    },
-
-    contentC: {
-        type: String,
-        required: [true, 'An multipile answer needs to have answers.'],
-    },
-
-    contentD: {
-        type: String,
-        required: [true, 'An multipile answer needs to have answers.'],
-    },
-
-    answeredBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-        required: [true, 'An answer needs to be answered by a user.'],
-    },
+    selectedChoice: { 
+        type: String, 
+        required: [true, 'An open answer needs to have a date.'],
+    }, 
 
     createdBy: {
         type: Schema.Types.ObjectId,

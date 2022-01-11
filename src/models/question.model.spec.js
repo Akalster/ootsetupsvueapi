@@ -28,7 +28,7 @@ describe('question model', function () {
 
             const question = new Question({
                 reviewkey: review._id,
-                type: "Open",
+                type: "open",
                 content: "Goeie vraag",  
                 createdBy: user._id
             });
@@ -44,10 +44,10 @@ describe('question model', function () {
                 team: "Oranje", 
                 email: "test@test.nl", 
                 password: "secret"
-            });
+            }); 
 
             const testQuestion = {
-                type: "Open",
+                type: "open",
                 createdBy: user._id
             };
 
@@ -98,7 +98,7 @@ describe('question model', function () {
 
             const testQuestion = {
                 reviewkey: review._id,
-                type: "Open"
+                type: "open"
             };
 
             const question = new Question(testQuestion);

@@ -4,30 +4,10 @@ const Schema = mongoose.Schema;
 const getModel = require('./model_cache');
 
 const ScaleAnswerSchema = new Schema({
-    scale1: {
+    selectedScale: {
         type: String,
         required: [true, 'An scale answer needs to have scales.'],
-    },
-
-    scale2: {
-        type: String,
-        required: [true, 'An scale answer needs to have scales.'],
-    },
-
-    scale3: {
-        type: String,
-        required: [true, 'An scale answer needs to have scales.'],
-    },
-
-    scale4: {
-        type: String,
-        required: [true, 'An scale answer needs to have scales.'],
-    },
-
-    scale5: {
-        type: String,
-        required: [true, 'An scale answer needs to have scales.'],
-    },
+    }, 
     
     createdBy: {
         type: Schema.Types.ObjectId,
@@ -48,7 +28,7 @@ const ScaleAnswerSchema = new Schema({
 });
 
 // mongoose plugin to always populate fields
-OpenAnswerSchema.plugin(require('mongoose-autopopulate'));
+ScaleAnswerSchema.plugin(require('mongoose-autopopulate'));
 
 // when a user is deleted all their answers need to be deleted
 // note: use an anonymous function and not a fat arrow function here!
