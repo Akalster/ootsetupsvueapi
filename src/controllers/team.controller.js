@@ -3,6 +3,8 @@ const errors = require('../errors');
 
 const User = require('../models/user.model')()
 
+const jwt = require("jsonwebtoken");
+
 async function create(req, res) {
     const users = [];
     const userIds = req.body.users;
@@ -22,7 +24,7 @@ async function create(req, res) {
         var teamProps = {
             "name": req.body.name,
             "description": req.body.description,
-            "createdBy": req.body.createdBy
+            "createdBy": jwt.decode(req.headers.authorization.split(" ")[1]).id
         }
 
         const team = new Team(teamProps);
@@ -40,8 +42,16 @@ async function create(req, res) {
 async function addUser(req, res) {
     const userId = req.body.userId;
     const teamId = req.body.teamId;
+    
+    var decodedToken = jwt.decode(req.headers.authorization.split(" ")[1])
 
-    var team = await Team.findOne({ name: teamId }).exec();
+    var team = await Team.findOne({ _id: teamId }).exec();
+
+    if(team.createdBy != decodedToken.id){
+        res.status(403).send({ message: "You are not allowed to change this team!"});
+        return;
+    }
+
     var user = await User.findById(userId).exec();
 
     if(team == null || user == null){
@@ -49,15 +59,13 @@ async function addUser(req, res) {
         return;
     }
 
-    if (team.users.every((element) => {
-        if (element._id == userId) {
-          res
+    if(team.users.some(q => q._id == userId)){
+        console.log(team.users, userId)
+        res
             .status(400)
-            .send({ message: "This user already is in the team!" });
-          return false;
-        }
-        return true;
-      })) {
+            .send({ message: "This user is already in the team!" });
+          return;
+    }else{
         team.users.push(user);
         team.save();
 
@@ -69,7 +77,7 @@ async function removeUser(req, res){
     const userId = req.body.userId;
     const teamId = req.body.teamId;
 
-    var team = await Team.findOne({ name: teamId }).exec();
+    var team = await Team.findOne({ _id: teamId }).exec();
     var user = await User.findById(userId).exec();
 
     if(team == null || user == null){
@@ -77,21 +85,11 @@ async function removeUser(req, res){
         return;
     }
 
-    var exists = false;
-
-    team.users.forEach((element) => {
-        if (element._id != userId) {
-            exists = false;
-        }else{
-            exists = true;
-        }
-      })
-
-    if(exists){
+    if(team.users.some(q => q._id == userId)){
         var filtered = team.users.filter(q => q._id != userId);
 
         var updated = {
-            "name": teamId,
+            "name": team.name,
             "description": team.description,
             "users": filtered
         }
@@ -101,8 +99,8 @@ async function removeUser(req, res){
         })
     }else{
         res
-            .status(400)
-            .send({ message: "This user is not in the team!" });
+        .status(400)
+        .send({ message: "This user is not in the team!" });
     }
 }
 
