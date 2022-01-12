@@ -2,12 +2,15 @@ const express = require('express');
 const router = express.Router();
 
 const Review = require('../models/review.model')(); // note we need to call the model caching function
+const User = require('../models/user.model')(); // note we need to call the model caching function
 
 const CrudController = require('../controllers/crud');
+const InviteController = require('../controllers/invite.controller');
 
 const ReviewController = require('../controllers/review.controller');
 
 const ReviewCrudController = new CrudController(Review);
+const UserCrudController = new CrudController(User);
 
 // get all reviews
 router.get('/', ReviewCrudController.getAll);
@@ -29,5 +32,8 @@ router.put('/:id', ReviewCrudController.update);
 
 // remove a review
 router.delete('/:id', ReviewCrudController.delete);
+
+// get a review and invite
+router.post('/:id/invite', InviteController.sendmailInvite);
 
 module.exports = router;
