@@ -18,8 +18,8 @@ const UserSchema = new Schema({
     }, 
 
     team: { 
-        type: String,
-        required: [true, 'A user needs to have a team.'],
+        type: Schema.Types.ObjectId,
+        ref: 'team'
     }, 
     
     email: { 

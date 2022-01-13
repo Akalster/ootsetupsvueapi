@@ -6,6 +6,10 @@ const User = require('../models/user.model')()
 const jwt = require("jsonwebtoken");
 
 async function create(req, res) {
+    if(req.headers.authorization == null){
+        res.status(403).send({ message: "Not authorized" });
+        return;
+    }
     const users = [];
     const userIds = req.body.users;
 
@@ -16,9 +20,11 @@ async function create(req, res) {
         return;
     }
 
-    userIds.map((element) => {
-        users.push(User.find({ _id: element}).exec())
-    })
+    if(userIds != undefined){
+        userIds.map((element) => {
+            users.push(User.find({ _id: element}).exec())
+        })
+    }
 
     Promise.all(users).then(async result => {
         var teamProps = {
@@ -28,10 +34,12 @@ async function create(req, res) {
         }
 
         const team = new Team(teamProps);
-        
-        result.forEach(user => {
-            team.users.push(user[0])
-        });
+
+        if(result.length > 0){
+            result.forEach(user => {
+                team.users.push(user[0])
+            });
+        }
 
         await team.save();
 
@@ -40,6 +48,10 @@ async function create(req, res) {
 }
 
 async function addUser(req, res) {
+    if(req.headers.authorization == null){
+        res.status(403).send({ message: "Not authorized" });
+        return;
+    }
     const userId = req.body.userId;
     const teamId = req.body.teamId;
     
@@ -74,6 +86,10 @@ async function addUser(req, res) {
 }
 
 async function removeUser(req, res){
+    if(req.headers.authorization == null){
+        res.status(403).send({ message: "Not authorized" });
+        return;
+    }
     const userId = req.body.userId;
     const teamId = req.body.teamId;
 
@@ -105,6 +121,10 @@ async function removeUser(req, res){
 }
 
 async function update(req, res){
+    if(req.headers.authorization == null){
+        res.status(403).send({ message: "Not authorized" });
+        return;
+    }
     var updatedProps = {
         "name": req.body.name,
         "description": req.body.description

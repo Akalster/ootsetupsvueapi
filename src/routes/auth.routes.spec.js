@@ -11,8 +11,7 @@ describe('authentication endpoints', function() {
         it('(POST /register) should create a new user', async function() {
             const testUser = {
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             }
@@ -31,8 +30,7 @@ describe('authentication endpoints', function() {
 
         it('(POST /register) should not create a user without a firstname', async function() {
             const testUser = {
-                lastname: "Tester", 
-                team: "Oranje",  
+                lastname: "Tester",
                 email: "test@test.nl",
                 password: "secret"
             }
@@ -47,24 +45,7 @@ describe('authentication endpoints', function() {
         
         it('(POST /register) should not create a user without a lastname', async function() {
             const testUser = {
-                firstname: "Test", 
-                team: "Oranje",  
-                email: "test@test.nl",
-                password: "secret"
-            }
-
-            const res = await requester.post('/api/register').send(testUser)
-    
-            expect(res).to.have.status(400)
-    
-            const docCount = await User.find().countDocuments()
-            expect(docCount).to.equal(0)
-        })
-
-        it('(POST /register) should not create a user without a team', async function() {
-            const testUser = {
-                firstname: "Test",
-                lastname: "Test",   
+                firstname: "Test",  
                 email: "test@test.nl",
                 password: "secret"
             }
@@ -81,7 +62,6 @@ describe('authentication endpoints', function() {
             const testUser = {
                 firstname: "Test",
                 lastname: "Tester", 
-                team: "Oranje",  
                 password: "secret"
             }
 
@@ -96,8 +76,7 @@ describe('authentication endpoints', function() {
         it('(POST /register) should not create a user without a password', async function() {
             const testUser = {
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl"
             }
 
@@ -113,8 +92,7 @@ describe('authentication endpoints', function() {
         it('(POST /login) should login user if there is a account', async function() {
             const testUser = {
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             }
@@ -126,7 +104,6 @@ describe('authentication endpoints', function() {
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('firstname', testUser.firstname)
             expect(user).to.have.property('lastname', testUser.lastname)
-            expect(user).to.have.property('team', testUser.team)
             expect(user).to.have.property('email', testUser.email)
             
             const res1 = await requester.post("/api/login").send({
@@ -141,8 +118,7 @@ describe('authentication endpoints', function() {
         it('(POST /login) should fail is user logs in with wrong password', async function() {
             const testUser = {
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             }
@@ -154,7 +130,6 @@ describe('authentication endpoints', function() {
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('firstname', testUser.firstname)
             expect(user).to.have.property('lastname', testUser.lastname)
-            expect(user).to.have.property('team', testUser.team)
             expect(user).to.have.property('email', testUser.email)
             
             const res1 = await requester.post("/api/login").send({
@@ -168,8 +143,7 @@ describe('authentication endpoints', function() {
         it('(POST /login) should fail is user logs in with wrong email', async function() {
             const testUser = {
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             }
@@ -181,7 +155,6 @@ describe('authentication endpoints', function() {
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('firstname', testUser.firstname)
             expect(user).to.have.property('lastname', testUser.lastname)
-            expect(user).to.have.property('team', testUser.team)
             expect(user).to.have.property('email', testUser.email)
             
             const res1 = await requester.post("/api/login").send({
@@ -197,8 +170,7 @@ describe('authentication endpoints', function() {
         it('create account; login with account;', async function() {
             const testUser = {
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             }

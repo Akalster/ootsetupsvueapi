@@ -14,8 +14,7 @@ describe('question model', function () {
 
             const user = await new User({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -40,8 +39,7 @@ describe('question model', function () {
 
             const user = await new User({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             }); 
@@ -59,8 +57,7 @@ describe('question model', function () {
         it('should reject a missing question type', async function () {
             const user = await new User({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -84,8 +81,7 @@ describe('question model', function () {
         it('should reject a missing createdBy', async function () {
             const user = await new User({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });

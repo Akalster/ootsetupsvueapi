@@ -16,8 +16,7 @@ describe('question routes', function() {
         it('(POST /question/:reviewid) should post a question', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -57,8 +56,7 @@ describe('question routes', function() {
         it('(PUT /question/:reviewid/question/:questionId) should update a question', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -108,8 +106,7 @@ describe('question routes', function() {
         it('(DELETE /question/:reviewid/question/:questionId) should delete a question', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -151,8 +148,7 @@ describe('question routes', function() {
         it('(DELETE /question/:reviewid/question/:questionId) should not delete a question of other user', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -166,8 +162,7 @@ describe('question routes', function() {
 
             await requester.post("/api/register").send({
                 firstname: "Iemand",
-                lastname: "Anders", 
-                team: "Oranje", 
+                lastname: "Anders",
                 email: "iemand@test.nl", 
                 password: "secret"
             });
