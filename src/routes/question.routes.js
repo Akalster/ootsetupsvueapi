@@ -15,6 +15,9 @@ router.get('/question', QuestionCrudController.getAll);
 // get a review
 router.get('/question/:id', QuestionCrudController.getOne);
 
+// get all questions per review
+router.get('/review/:reviewId/question', QuestionController.getPerReview);
+
 // add a review
 router.post('/review/:reviewId/question', QuestionController.create);
 

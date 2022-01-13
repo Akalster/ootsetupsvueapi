@@ -1,3 +1,4 @@
+const { should } = require('chai')
 const chai = require('chai')
 const expect = chai.expect
 
@@ -279,6 +280,43 @@ describe('review endpoints', function() {
         
             expect(reviewUpdate).to.have.status(401)
             expect(reviewUpdate.body).to.have.property('message', "Not authorized!")
+        })
+
+        it('should get all open reviews', async function() {
+            await requester.post("/api/register").send({
+                firstname: "Test",
+                lastname: "Tester", 
+                team: "Oranje", 
+                email: "test@test.nl", 
+                password: "secret"
+            });
+
+            const userresult = await requester.post("/api/login").send({
+                email: "test@test.nl",
+                password: "secret"
+            })
+
+            const jwt = userresult.body.token;
+
+            const testReview1 = {
+                title: "TestReview1",
+                open: true,
+            }
+
+            const testReview2 = {
+                title: "TestReview2",
+                open: false,
+            }
+
+            const review = await requester.post("/api/review").set({ Authorization: `Bearer ${jwt}` }).send(testReview1);
+            const review2 = await requester.post("/api/review").set({ Authorization: `Bearer ${jwt}` }).send(testReview2);
+
+            expect(review).to.have.status(201)
+            expect(review2).to.have.status(201)
+
+            const openreviews = await requester.get("/api/review/open").set({ Authorization: `Bearer ${jwt}` }).send();
+
+            expect(openreviews.body).to.have.length(1);
         })
     })
 })

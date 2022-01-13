@@ -36,7 +36,7 @@ describe('question routes', function() {
             const reviewid = reviewresult.body._id;
 
             const testQuestion = {
-                type: "Open",
+                type: "open",
                 content: "Diego's vraag"
             }
 
@@ -76,12 +76,12 @@ describe('question routes', function() {
             const reviewid = reviewresult.body._id;
 
             const testQuestion = {
-                type: "Open",
+                type: "open",
                 content: "Diego's vraag"
             }
 
             const updateQuestion = {
-                type: "Scale",
+                type: "scale",
                 content: "Jamie's vraag"
             }
 
@@ -126,7 +126,7 @@ describe('question routes', function() {
             const reviewid = reviewresult.body._id;
 
             const testQuestion = {
-                type: "Open",
+                type: "open",
                 content: "Diego's vraag"
             }
 
@@ -182,7 +182,7 @@ describe('question routes', function() {
             const reviewid = reviewresult.body._id;
 
             const testQuestion = {
-                type: "Open",
+                type: "open",
                 content: "Diego's vraag"
             }
 

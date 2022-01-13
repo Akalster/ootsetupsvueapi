@@ -42,8 +42,16 @@ async function remove(req, res) {
     }
 }
 
+async function getPerReview(req, res) {
+    const reviewId = req.params.reviewId;
+    const entity = await Question.find({reviewkey: reviewId})
+    console.log(entity);
+    res.status(201).send(entity);
+}
+
 module.exports = {
     create,
     update, 
-    remove
+    remove,
+    getPerReview
 }
