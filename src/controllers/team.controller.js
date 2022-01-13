@@ -16,9 +16,11 @@ async function create(req, res) {
         return;
     }
 
-    userIds.map((element) => {
-        users.push(User.find({ _id: element}).exec())
-    })
+    if(userIds != undefined){
+        userIds.map((element) => {
+            users.push(User.find({ _id: element}).exec())
+        })
+    }
 
     Promise.all(users).then(async result => {
         var teamProps = {
@@ -28,10 +30,12 @@ async function create(req, res) {
         }
 
         const team = new Team(teamProps);
-        
-        result.forEach(user => {
-            team.users.push(user[0])
-        });
+
+        if(result.length > 0){
+            result.forEach(user => {
+                team.users.push(user[0])
+            });
+        }
 
         await team.save();
 
