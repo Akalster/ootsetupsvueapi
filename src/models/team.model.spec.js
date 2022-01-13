@@ -11,8 +11,7 @@ describe('team model', function() {
     it('should create a team', async function () {
         const user = await new User({
             firstname: "Test",
-            lastname: "Tester", 
-            team: "Oranje", 
+            lastname: "Tester",
             email: "test@test.nl", 
             password: "secret"
         });
@@ -30,8 +29,7 @@ describe('team model', function() {
     it('Should reject a missing team name', async function () {
         const user = new User({
             firstname: "Test",
-            lastname: "Tester", 
-            team: "Oranje", 
+            lastname: "Tester",
             email: "test@test.nl", 
             password: "secret"
         });

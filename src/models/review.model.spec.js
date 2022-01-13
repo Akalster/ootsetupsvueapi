@@ -13,8 +13,7 @@ describe('review model', function () {
 
             const user = await new User({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });

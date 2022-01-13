@@ -28,8 +28,7 @@ describe('review endpoints', function() {
         it('(POST /review/) should post a review', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -61,8 +60,7 @@ describe('review endpoints', function() {
         it('(POST /review/) should not post a review without title', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -87,8 +85,7 @@ describe('review endpoints', function() {
         it('(POST /review/) should not post a review without open', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -114,8 +111,7 @@ describe('review endpoints', function() {
         it('(PUT /review/) should update a review', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -155,8 +151,7 @@ describe('review endpoints', function() {
         it('(PUT /review/) should not update a review of differnt user', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -170,8 +165,7 @@ describe('review endpoints', function() {
 
             await requester.post("/api/register").send({
                 firstname: "Iemand",
-                lastname: "Anders", 
-                team: "Oranje", 
+                lastname: "Anders",
                 email: "iemand@test.nl", 
                 password: "secret"
             });
@@ -207,8 +201,7 @@ describe('review endpoints', function() {
         it('(DELETE /review/) should delete a review', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -243,8 +236,7 @@ describe('review endpoints', function() {
         it('(DELETE /review/) should not delete a review of other user', async function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             });
@@ -258,8 +250,7 @@ describe('review endpoints', function() {
 
             await requester.post("/api/register").send({
                 firstname: "Iemand",
-                lastname: "Anders", 
-                team: "Oranje", 
+                lastname: "Anders",
                 email: "iemand@test.nl", 
                 password: "secret"
             });

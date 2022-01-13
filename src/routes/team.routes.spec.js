@@ -15,7 +15,6 @@ describe("Team routes tests", async function () {
     await requester.post("/api/register").send({
       firstname: "Test",
       lastname: "Tester",
-      team: "Oranje",
       email: "test@test.nl",
       password: "secret",
     });

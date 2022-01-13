@@ -13,6 +13,7 @@ function jwt() {
             baseURL + 'auth/login',
             baseURL + 'auth/register',
             baseURL + 'users',
+            baseURL + 'team',
             { url: /^\/api\/users\/.*/, methods: ['GET'] },
         ],
     });

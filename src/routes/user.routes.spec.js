@@ -10,7 +10,6 @@ async function createUser() {
     await requester.post("/api/register").send({
         firstname: "Test",
         lastname: "Tester",
-        team: "Oranje",
         email: "test@test.nl",
         password: "secret"
     });
@@ -28,16 +27,14 @@ describe('authentication endpoints', function() {
         it('(PUT /user/:id) should update a user', async function() {
             const testUser = {
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             }
 
             const updateUser = {
                 firstname: "Karel",
-                lastname: "Marel", 
-                team: "Blauw", 
+                lastname: "Marel",
                 email: "karel@test.nl", 
             }
     
@@ -48,7 +45,6 @@ describe('authentication endpoints', function() {
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('firstname', testUser.firstname)
             expect(user).to.have.property('lastname', testUser.lastname)
-            expect(user).to.have.property('team', testUser.team)
             expect(user).to.have.property('email', testUser.email)
             
             const result = await requester.post("/api/login").send({
@@ -66,7 +62,6 @@ describe('authentication endpoints', function() {
             const updatedUserResult = await User.findOne({_id: userId}); 
             expect(updatedUserResult).to.have.property('firstname', updateUser.firstname)
             expect(updatedUserResult).to.have.property('lastname', updateUser.lastname)
-            expect(updatedUserResult).to.have.property('team', updateUser.team)
             expect(updatedUserResult).to.have.property('email', updateUser.email)
             
         })
@@ -75,8 +70,7 @@ describe('authentication endpoints', function() {
         it('(DELETE /user/:id) should delete a user', async function() {
             const testUser = {
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             }
@@ -88,7 +82,6 @@ describe('authentication endpoints', function() {
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('firstname', testUser.firstname)
             expect(user).to.have.property('lastname', testUser.lastname)
-            expect(user).to.have.property('team', testUser.team)
             expect(user).to.have.property('email', testUser.email)
             
             const result = await requester.post("/api/login").send({
@@ -111,8 +104,7 @@ describe('authentication endpoints', function() {
         it('(get /user/:id) should get a user', async function() {
             const testUser = {
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             }
@@ -124,7 +116,6 @@ describe('authentication endpoints', function() {
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('firstname', testUser.firstname)
             expect(user).to.have.property('lastname', testUser.lastname)
-            expect(user).to.have.property('team', testUser.team)
             expect(user).to.have.property('email', testUser.email)
             
             const result = await requester.post("/api/login").send({
@@ -143,8 +134,7 @@ describe('authentication endpoints', function() {
         it('(get /user/) should get all user', async function() {
             const testUser = {
                 firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
+                lastname: "Tester",
                 email: "test@test.nl", 
                 password: "secret"
             }
@@ -156,8 +146,6 @@ describe('authentication endpoints', function() {
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('firstname', testUser.firstname)
             expect(user).to.have.property('lastname', testUser.lastname)
-            expect(user).to.have.property('team', testUser.team)
-            expect(user).to.have.property('email', testUser.email)
             
             const result = await requester.post("/api/login").send({
                 email: "test@test.nl",
