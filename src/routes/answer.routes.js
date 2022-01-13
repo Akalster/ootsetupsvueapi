@@ -24,13 +24,13 @@ router.get('/answer/scale/:questionId', ScaleAnswerCrudController.getAnswerByQue
 router.get('/answer/percentage/:questionId', PercentageAnswerCrudController.getAnswerByQuestionId);
 
 // add a review
-router.post('/question/:questionId/answer/open', OpenAnswerCrudController.create);
+router.post('/question/:questionId/open', OpenAnswerCrudController.create);
 
-router.post('/question/:questionId/answer/multi', MultipileChoiceAnswerCrudController.create);
+router.post('/question/:questionId/multi', MultipileChoiceAnswerCrudController.create);
 
-router.post('/question/:questionId/answer/scale', ScaleAnswerCrudController.create);
+router.post('/question/:questionId/scale', ScaleAnswerCrudController.create);
 
-router.post('/question/:questionId/answer/percentage', PercentageAnswerCrudController.create);
+router.post('/question/:questionId/percentage', PercentageAnswerCrudController.create);
 
 
 // update a review

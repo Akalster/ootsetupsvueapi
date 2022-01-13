@@ -6,7 +6,11 @@ const getModel = require('./model_cache');
 const MultipileChoiceAnswerSchema = new Schema({
     selectedChoice: { 
         type: String, 
-        required: [true, 'An open answer needs to have a date.'],
+        required: [true, 'An open answer needs to have a choice.'],
+    }, 
+
+    content: {
+        type: String, 
     }, 
 
     createdBy: {

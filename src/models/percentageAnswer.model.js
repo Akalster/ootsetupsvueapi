@@ -3,10 +3,9 @@ const Schema = mongoose.Schema;
 
 const getModel = require('./model_cache');
 
-const OpenAnswerSchema = new Schema({
+const PercentageAnswerSchema = new Schema({
     content: {
         type: String,
-        required: [true, 'An open answer needs to have content.'],
     },
 
     percentage: {
@@ -33,7 +32,7 @@ const OpenAnswerSchema = new Schema({
 });
 
 // mongoose plugin to always populate fields
-OpenAnswerSchema.plugin(require('mongoose-autopopulate'));
+PercentageAnswerSchema.plugin(require('mongoose-autopopulate'));
 
 // when a user is deleted all their answers need to be deleted
 // note: use an anonymous function and not a fat arrow function here!
@@ -50,4 +49,4 @@ OpenAnswerSchema.plugin(require('mongoose-autopopulate'));
 // })
 
 // export the user model through a caching function
-module.exports = getModel('OpenAnswer', OpenAnswerSchema);
+module.exports = getModel('PercentageAnswerSchema', PercentageAnswerSchema);

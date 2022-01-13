@@ -12,11 +12,18 @@ class AnswerCrudController {
     // lexical scope for 'this'
     create = async (req, res, next) => {
         const questionId = req.params.questionId;
-        const answerProps = req.body;
-        answerProps.questionId = questionId;
-        answerProps.createdBy = req.user.id;
-
-        const entity = new this.model(answerProps);
+        
+        const body = {
+            content: req.body.content, 
+            questionId: questionId,
+            createdBy: req.user.id,
+            answeredDate: new Date(),
+            selectedChoice: req.body.selectedChoice, 
+            selectedScale: req.body.selectedScale, 
+            percentage: req.body.percentage
+        }
+        
+        const entity = new this.model(body);
         await entity.save();
         res.status(201).send(entity);
     };

@@ -8,6 +8,10 @@ const ScaleAnswerSchema = new Schema({
         type: String,
         required: [true, 'An scale answer needs to have scales.'],
     }, 
+
+    content: {
+        type: String, 
+    }, 
     
     createdBy: {
         type: Schema.Types.ObjectId,

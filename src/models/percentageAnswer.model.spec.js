@@ -44,38 +44,7 @@ describe('percentage answer model', function () {
             await expect(percentageQuestion.save()).to.be.ok;
         });
 
-        it('should reject a missing answer content', async function () {
-            const user = await new User({
-                firstname: "Test",
-                lastname: "Tester", 
-                team: "Oranje", 
-                email: "test@test.nl", 
-                password: "secret"
-            });
-            
-            const review = await new Review({
-                createdBy: user._id, 
-                title: 'Hoe testerig ben ik?',
-                open: true,
-            });
-
-            const question = await new Question({
-                reviewkey: review._id,
-                type: "open",
-                content: "Goeie vraag",  
-                createdBy: user._id
-            });
-
-            const percentageQuestion = await new PercentageQuestion({
-                percentage: 100, 
-                createdBy: user._id, 
-                answeredDate: new Date, 
-                questionId: question._id, 
-            })
-
-
-            await expect(percentageQuestion.save()).to.be.rejectedWith(Error);
-        });
+      
 
         it('should reject a missing answer date', async function () {
             const user = await new User({
@@ -200,6 +169,7 @@ describe('percentage answer model', function () {
 
             const percentageQuestion = await new PercentageQuestion({
                 content: "Goed antwoord!", 
+                percentage: 100, 
                 createdBy: user._id, 
                 answeredDate: new Date, 
                 questionId: question._id, 
