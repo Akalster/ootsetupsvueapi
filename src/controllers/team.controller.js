@@ -72,12 +72,13 @@ async function addUser(req, res) {
     }
 
     if(team.users.some(q => q._id == userId)){
-        console.log(team.users, userId)
         res
             .status(400)
             .send({ message: "This user is already in the team!" });
           return;
     }else{
+        user.team = teamId;
+        user.save();
         team.users.push(user);
         team.save();
 
