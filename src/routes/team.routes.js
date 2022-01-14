@@ -27,6 +27,6 @@ router.put('/removeUser', TeamController.removeUser)
 router.put('/:id', TeamController.update);
 
 // Remove a team
-router.delete("/:id", TeamCrudController.delete);
+router.delete("/:id", TeamController.remove);
 
 module.exports = router;

@@ -141,9 +141,31 @@ async function update(req, res){
     }
 }
 
+async function remove(req, res){
+    if(req.headers.authorization == null){
+        res.status(403).send({ message: "Not authorized" });
+        return;
+    }
+
+    var decodedToken = jwt.decode(req.headers.authorization.split(" ")[1])
+
+    var team = await Team.findById(req.params.id);
+    var user = await User.findById(decodedToken.id)
+
+    if(team.createdBy.valueOf() == decodedToken.id){
+        await Team.findByIdAndDelete(team._id)
+        user.team = null;
+        user.save();
+        res.status(200).send({message: "Team has been succesfully deleted"});
+    }else{
+        res.status(401).send({message: "Not authorized!"})
+    }
+}
+
 module.exports = {
     create,
     addUser,
     removeUser,
-    update
+    update,
+    remove
 }
