@@ -34,21 +34,21 @@ router.post('/question/:questionId/percentage', PercentageAnswerCrudController.c
 
 
 // update a review
-router.put('/question/:questionId/answer/open/:answerId', OpenAnswerCrudController.update);
+router.put('/question/:questionId/open/:answerId', OpenAnswerCrudController.update);
 
-router.put('/question/:questionId/answer/multi/:answerId', MultipileChoiceAnswerCrudController.update);
+router.put('/question/:questionId/multi/:answerId', MultipileChoiceAnswerCrudController.update);
 
-router.put('/question/:questionId/answer/scale/:answerId', ScaleAnswerCrudController.update);
+router.put('/question/:questionId/scale/:answerId', ScaleAnswerCrudController.update);
 
-router.put('/question/:questionId/answer/percentage/:answerId', PercentageAnswerCrudController.update);
+router.put('/question/:questionId/percentage/:answerId', PercentageAnswerCrudController.update);
 
 // remove a review
-router.delete('/question/:questionId/answer/open/:answerId', OpenAnswerCrudController.delete);
+router.delete('/question/:questionId/open/:answerId', OpenAnswerCrudController.delete);
 
-router.delete('/question/:questionId/answer/multi/:answerId', MultipileChoiceAnswerCrudController.delete);
+router.delete('/question/:questionId/multi/:answerId', MultipileChoiceAnswerCrudController.delete);
 
-router.delete('/question/:questionId/answer/scale/:answerId', ScaleAnswerCrudController.delete);
+router.delete('/question/:questionId/scale/:answerId', ScaleAnswerCrudController.delete);
 
-router.delete('/question/:questionId/answer/percentage/:answerId', PercentageAnswerCrudController.delete);
+router.delete('/question/:questionId/percentage/:answerId', PercentageAnswerCrudController.delete);
 
 module.exports = router;

@@ -1,5 +1,4 @@
 // this contains all basic CRUD endpoints on a schema
-
 const errors = require('../errors');
 
 // the schema is supplied by injection

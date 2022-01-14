@@ -20,5 +20,5 @@ localconnect.mongo(process.env.MONGO_TEST_DB);
 
 beforeEach(async () => {
     // drop both collections before each test
-    await Promise.all([User.deleteMany(), Review.deleteMany(), Question.deleteMany(), OpenAnswer.deleteMany(), MultiAnswer.deleteMany(), ScaleAnswer.deleteMany(), Teams.deleteMany()]);
+    await Promise.all([User.deleteMany(), Review.deleteMany(), Question.deleteMany(), OpenAnswer.deleteMany(), MultiAnswer.deleteMany(), ScaleAnswer.deleteMany(), PercentageAnswer.deleteMany() , Teams.deleteMany()]);
 });

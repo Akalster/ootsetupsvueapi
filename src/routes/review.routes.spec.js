@@ -11,7 +11,7 @@ async function createUser() {
     await requester.post("/api/register").send({
         firstname: "Test",
         lastname: "Tester",
-        team: "Oranje",
+
         email: "test@test.nl",
         password: "secret"
     });
@@ -286,7 +286,7 @@ describe('review endpoints', function() {
             await requester.post("/api/register").send({
                 firstname: "Test",
                 lastname: "Tester", 
-                team: "Oranje", 
+       
                 email: "test@test.nl", 
                 password: "secret"
             });
