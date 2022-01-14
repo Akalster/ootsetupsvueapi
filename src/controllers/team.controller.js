@@ -36,8 +36,11 @@ async function create(req, res) {
         const team = new Team(teamProps);
 
         if(result.length > 0){
-            result.forEach(user => {
+            result.forEach(async user => {
                 team.users.push(user[0])
+                var updateUser = await User.findById(user[0]._id)
+                updateUser.team = team._id;
+                updateUser.save();
             });
         }
 
