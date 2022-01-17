@@ -1,38 +1,40 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const getModel = require('./model_cache');
+const getModel = require("./model_cache");
 
 const PercentageAnswerSchema = new Schema({
-    content: {
-        type: String,
-    },
+  content: {
+    type: String
+  },
 
-    percentage: {
-        type: Number, 
-        required: [true, 'An open answer needs to have percentage.'],
-    },
-    
-    createdBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-        required: [true, 'An answer needs to be made by a user.'],
-    },
+  percentage: {
+    type: Number,
+    required: [true, "An open answer needs to have percentage."]
+  },
 
-    answeredDate: { 
-        type: Date, 
-        required: [true, 'An open answer needs to have a date.'],
-    }, 
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: [true, "An answer needs to be made by a user."]
+  },
 
-    questionId: {
-        type: Schema.Types.ObjectId,
-        ref: 'question',
-        required: [true, 'An answer needs to be made for a question.']
-    }
+  answeredDate: {
+    type: Date,
+    required: [true, "An open answer needs to have a date."]
+  },
+
+  questionId: {
+    type: Schema.Types.ObjectId,
+    ref: "question",
+    required: [true, "An answer needs to be made for a question."]
+  }
 });
 
+PercentageAnswerSchema.index({ createdBy: 1, questionId: 1 }, { unique: true });
+
 // mongoose plugin to always populate fields
-PercentageAnswerSchema.plugin(require('mongoose-autopopulate'));
+PercentageAnswerSchema.plugin(require("mongoose-autopopulate"));
 
 // when a user is deleted all their answers need to be deleted
 // note: use an anonymous function and not a fat arrow function here!
@@ -49,4 +51,4 @@ PercentageAnswerSchema.plugin(require('mongoose-autopopulate'));
 // })
 
 // export the user model through a caching function
-module.exports = getModel('PercentageAnswerSchema', PercentageAnswerSchema);
+module.exports = getModel("PercentageAnswerSchema", PercentageAnswerSchema);
