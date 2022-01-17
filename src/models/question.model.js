@@ -1,61 +1,61 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const AnswerSchema = require('./answer.model');
+const AnswerSchema = require("./answer.model");
 
-const getModel = require('./model_cache');
+const getModel = require("./model_cache");
 
 const QuestionSchema = new Schema({
-    reviewkey: {
-        type: Schema.Types.ObjectId,
-        ref: 'review',
-        required: [true, 'A question needs to have a reviewkey.'],
-    },
+  reviewkey: {
+    type: Schema.Types.ObjectId,
+    ref: "review",
+    required: [true, "A question needs to have a reviewkey."]
+  },
 
-    content: {
-        type: String,
-        required: [true, 'A question needs to have content.']
-    },
+  content: {
+    type: String,
+    required: [true, "A question needs to have content."]
+  },
 
-    option1: {
-        type: String,
-    },
+  option1: {
+    type: String
+  },
 
-    option2: {
-        type: String,
-    },
+  option2: {
+    type: String
+  },
 
-    option3: {
-        type: String,
-    },
+  option3: {
+    type: String
+  },
 
-    option4: {
-        type: String,
-    },
+  option4: {
+    type: String
+  },
 
-    option5: {
-        type: String,
-    },
+  option5: {
+    type: String
+  },
 
-    option6: {
-        type: String,
-    },
+  option6: {
+    type: String
+  },
 
-    //Open voor verandering, bespreken met iedereen.
-    type: {
-        type: String,
-        enum: ['open', 'multipilechoice', 'percentage', 'scale'],
-        required: [true, 'A question needs to have a type.'],
-    }, 
+  //Open voor verandering, bespreken met iedereen.
+  type: {
+    type: String,
+    enum: ["open", "multi", "percentage", "scale"],
+    required: [true, "A question needs to have a type."]
+  },
 
-    createdBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-        required: [true, 'A question needs to be created by a user.']
-    }
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: [true, "A question needs to be created by a user."]
+  }
 });
 
 // mongoose plugin to always populate fields
-QuestionSchema.plugin(require('mongoose-autopopulate'));
+QuestionSchema.plugin(require("mongoose-autopopulate"));
 
 // when a user is deleted all their questions need to be deleted
 // note: use an anonymous function and not a fat arrow function here!
@@ -72,4 +72,4 @@ QuestionSchema.plugin(require('mongoose-autopopulate'));
 // })
 
 // export the user model through a caching function
-module.exports = getModel('Question', QuestionSchema);
+module.exports = getModel("Question", QuestionSchema);
