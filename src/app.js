@@ -44,7 +44,7 @@ app.use(jwt());
 app.use("/api/user", userRoutes);
 app.use("/api/review", reviewRoutes);
 app.use("/api", questionRoutes);
-app.use("/api/answer", answerRoutes);
+app.use("/api", answerRoutes);
 app.use("/api/team", teamRoutes);
 
 // catch all not found response
