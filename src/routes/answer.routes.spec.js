@@ -77,7 +77,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/open`)
+        .post(`/api/question/${questionId}/open`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -137,7 +137,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/open`)
+        .post(`/api/question/${questionId}/open`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -145,7 +145,7 @@ describe("answer endpoints", function() {
       const answer = await OpenAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .put(`/api/answer/question/${questionId}/open/${answer._id}`)
+        .put(`/api/question/${questionId}/open/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(204);
@@ -219,7 +219,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/open`)
+        .post(`/api/question/${questionId}/open`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -227,7 +227,7 @@ describe("answer endpoints", function() {
       const answer = await OpenAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .put(`/api/answer/question/${questionId}/open/${answer._id}`)
+        .put(`/api/question/${questionId}/open/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt2}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(401);
@@ -286,7 +286,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/open`)
+        .post(`/api/question/${questionId}/open`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -294,7 +294,7 @@ describe("answer endpoints", function() {
       const answer = await OpenAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .delete(`/api/answer/question/${questionId}/open/${answer._id}`)
+        .delete(`/api/question/${questionId}/open/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(204);
@@ -368,7 +368,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/open`)
+        .post(`/api/question/${questionId}/open`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -376,7 +376,7 @@ describe("answer endpoints", function() {
       const answer = await OpenAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .delete(`/api/answer/question/${questionId}/open/${answer._id}`)
+        .delete(`/api/question/${questionId}/open/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt2}` })
         .send();
       expect(UpdateRes).to.have.status(401);
@@ -435,7 +435,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/multi`)
+        .post(`/api/question/${questionId}/multi`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
 
@@ -504,7 +504,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/multi`)
+        .post(`/api/question/${questionId}/multi`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -512,7 +512,7 @@ describe("answer endpoints", function() {
       const answer = await MultiAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .put(`/api/answer/question/${questionId}/multi/${answer._id}`)
+        .put(`/api/question/${questionId}/multi/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(204);
@@ -595,7 +595,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/multi`)
+        .post(`/api/question/${questionId}/multi`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -603,7 +603,7 @@ describe("answer endpoints", function() {
       const answer = await MultiAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .put(`/api/answer/question/${questionId}/multi/${answer._id}`)
+        .put(`/api/question/${questionId}/multi/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt2}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(401);
@@ -670,7 +670,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/multi`)
+        .post(`/api/question/${questionId}/multi`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -678,7 +678,7 @@ describe("answer endpoints", function() {
       const answer = await MultiAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .delete(`/api/answer/question/${questionId}/multi/${answer._id}`)
+        .delete(`/api/question/${questionId}/multi/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send();
       expect(UpdateRes).to.have.status(204);
@@ -757,7 +757,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/multi`)
+        .post(`/api/question/${questionId}/multi`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -765,7 +765,7 @@ describe("answer endpoints", function() {
       const answer = await MultiAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .delete(`/api/answer/question/${questionId}/multi/${answer._id}`)
+        .delete(`/api/question/${questionId}/multi/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt2}` })
         .send();
       expect(UpdateRes).to.have.status(401);
@@ -824,7 +824,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/scale`)
+        .post(`/api/question/${questionId}/scale`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
 
@@ -894,7 +894,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/scale`)
+        .post(`/api/question/${questionId}/scale`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -902,7 +902,7 @@ describe("answer endpoints", function() {
       const answer = await ScaleAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .put(`/api/answer/question/${questionId}/scale/${answer._id}`)
+        .put(`/api/question/${questionId}/scale/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(204);
@@ -985,7 +985,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/scale`)
+        .post(`/api/question/${questionId}/scale`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -993,7 +993,7 @@ describe("answer endpoints", function() {
       const answer = await ScaleAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .put(`/api/answer/question/${questionId}/scale/${answer._id}`)
+        .put(`/api/question/${questionId}/scale/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt2}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(401);
@@ -1061,7 +1061,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/scale`)
+        .post(`/api/question/${questionId}/scale`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -1069,7 +1069,7 @@ describe("answer endpoints", function() {
       const answer = await ScaleAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .delete(`/api/answer/question/${questionId}/scale/${answer._id}`)
+        .delete(`/api/question/${questionId}/scale/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(204);
@@ -1148,7 +1148,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/scale`)
+        .post(`/api/question/${questionId}/scale`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -1156,7 +1156,7 @@ describe("answer endpoints", function() {
       const answer = await ScaleAnswer.findOne({ _id: answerRes.body._id });
 
       const UpdateRes = await requester
-        .delete(`/api/answer/question/${questionId}/scale/${answer._id}`)
+        .delete(`/api/question/${questionId}/scale/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt2}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(401);
@@ -1212,7 +1212,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/percentage`)
+        .post(`/api/question/${questionId}/percentage`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
 
@@ -1278,7 +1278,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/percentage`)
+        .post(`/api/question/${questionId}/percentage`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -1288,7 +1288,7 @@ describe("answer endpoints", function() {
       });
 
       const UpdateRes = await requester
-        .put(`/api/answer/question/${questionId}/percentage/${answer._id}`)
+        .put(`/api/question/${questionId}/percentage/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(204);
@@ -1367,7 +1367,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/percentage`)
+        .post(`/api/question/${questionId}/percentage`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -1377,7 +1377,7 @@ describe("answer endpoints", function() {
       });
 
       const UpdateRes = await requester
-        .put(`/api/answer/question/${questionId}/percentage/${answer._id}`)
+        .put(`/api/question/${questionId}/percentage/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt2}` })
         .send(updatedAnswer);
       expect(UpdateRes).to.have.status(401);
@@ -1441,7 +1441,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/percentage`)
+        .post(`/api/question/${questionId}/percentage`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -1451,7 +1451,7 @@ describe("answer endpoints", function() {
       });
 
       const UpdateRes = await requester
-        .delete(`/api/answer/question/${questionId}/percentage/${answer._id}`)
+        .delete(`/api/question/${questionId}/percentage/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send();
       expect(UpdateRes).to.have.status(204);
@@ -1527,7 +1527,7 @@ describe("answer endpoints", function() {
       };
 
       const answerRes = await requester
-        .post(`/api/answer/question/${questionId}/percentage`)
+        .post(`/api/question/${questionId}/percentage`)
         .set({ Authorization: `Bearer ${jwt}` })
         .send(testAnswer);
       expect(answerRes).to.have.status(201);
@@ -1537,7 +1537,7 @@ describe("answer endpoints", function() {
       });
 
       const UpdateRes = await requester
-        .delete(`/api/answer/question/${questionId}/percentage/${answer._id}`)
+        .delete(`/api/question/${questionId}/percentage/${answer._id}`)
         .set({ Authorization: `Bearer ${jwt2}` })
         .send();
       expect(UpdateRes).to.have.status(401);
