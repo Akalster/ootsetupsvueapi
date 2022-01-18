@@ -19,7 +19,7 @@ router.get("/", ReviewCrudController.getAll);
 router.get("/open", ReviewController.getOpen);
 
 // get all closed reviews
-router.get("/open", ReviewController.getClosed);
+router.get("/closed", ReviewController.getClosed);
 
 // get all my reviews
 router.get("/user/:id", ReviewController.getMyReviews);
