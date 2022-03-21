@@ -36,6 +36,9 @@ const reviewRoutes = require("./routes/review.routes");
 const questionRoutes = require("./routes/question.routes");
 const answerRoutes = require("./routes/answer.routes");
 const teamRoutes = require("./routes/team.routes");
+const glitchRoutes = require("./routes/glitch.routes");
+const stepRoutes = require("./routes/step.routes");
+const routeRoutes = require("./routes/route.routes");
 
 const errors = require("./errors");
 
@@ -46,6 +49,9 @@ app.use("/api/review", reviewRoutes);
 app.use("/api", questionRoutes);
 app.use("/api", answerRoutes);
 app.use("/api/team", teamRoutes);
+app.use("/api/glitch", glitchRoutes);
+app.use("/api/step", stepRoutes);
+app.use("/api/route", routeRoutes);
 
 // catch all not found response
 app.use("*", function(_, res) {

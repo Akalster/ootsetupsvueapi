@@ -1,105 +1,105 @@
-const chai = require('chai')
-const expect = chai.expect
+// const chai = require('chai')
+// const expect = chai.expect
 
-var chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
+// var chaiAsPromised = require("chai-as-promised");
+// chai.use(chaiAsPromised);
 
-const Question = require('./question.model')(); // note we need to call the model caching function
-const Review = require('./review.model')(); // required for the reviewkey of question 
-const User = require('./user.model')(); // required for the bearer token to make requests
+// const Question = require('./question.model')(); // note we need to call the model caching function
+// const Review = require('./review.model')(); // required for the reviewkey of question 
+// const User = require('./user.model')(); // required for the bearer token to make requests
 
-describe('question model', function () {
-    describe('unit tests', function () {
-        it('should create a question', async function () {
+// describe('question model', function () {
+//     describe('unit tests', function () {
+//         it('should create a question', async function () {
 
-            const user = await new User({
-                firstname: "Test",
-                lastname: "Tester",
-                email: "test@test.nl", 
-                password: "secret"
-            });
+//             const user = await new User({
+//                 firstname: "Test",
+//                 lastname: "Tester",
+//                 email: "test@test.nl", 
+//                 password: "secret"
+//             });
             
-            const review = await new Review({
-                createdBy: user._id, 
-                title: 'Hoe testerig ben ik?',
-                open: true,
-            });
+//             const review = await new Review({
+//                 createdBy: user._id, 
+//                 title: 'Hoe testerig ben ik?',
+//                 open: true,
+//             });
 
-            const question = new Question({
-                reviewkey: review._id,
-                type: "open",
-                content: "Goeie vraag",  
-                createdBy: user._id
-            });
+//             const question = new Question({
+//                 reviewkey: review._id,
+//                 type: "open",
+//                 content: "Goeie vraag",  
+//                 createdBy: user._id
+//             });
 
-            await expect(question.save()).to.be.ok;
-        });
+//             await expect(question.save()).to.be.ok;
+//         });
 
-        it('should reject a missing reviewkey', async function () {
+//         it('should reject a missing reviewkey', async function () {
 
-            const user = await new User({
-                firstname: "Test",
-                lastname: "Tester",
-                email: "test@test.nl", 
-                password: "secret"
-            }); 
+//             const user = await new User({
+//                 firstname: "Test",
+//                 lastname: "Tester",
+//                 email: "test@test.nl", 
+//                 password: "secret"
+//             }); 
 
-            const testQuestion = {
-                type: "open",
-                createdBy: user._id
-            };
+//             const testQuestion = {
+//                 type: "open",
+//                 createdBy: user._id
+//             };
 
-            const question = new Question(testQuestion);
+//             const question = new Question(testQuestion);
 
-            await expect(question.save()).to.be.rejectedWith(Error);
-        });
+//             await expect(question.save()).to.be.rejectedWith(Error);
+//         });
 
-        it('should reject a missing question type', async function () {
-            const user = await new User({
-                firstname: "Test",
-                lastname: "Tester",
-                email: "test@test.nl", 
-                password: "secret"
-            });
+//         it('should reject a missing question type', async function () {
+//             const user = await new User({
+//                 firstname: "Test",
+//                 lastname: "Tester",
+//                 email: "test@test.nl", 
+//                 password: "secret"
+//             });
 
-            const review = await new Review({
-                createdBy: user._id, 
-                title: 'Hoe testerig ben ik?',
-                open: true,
-            });
+//             const review = await new Review({
+//                 createdBy: user._id, 
+//                 title: 'Hoe testerig ben ik?',
+//                 open: true,
+//             });
 
-            const testQuestion = {
-                reviewkey: review._id,
-                createdBy: user._id
-            };
+//             const testQuestion = {
+//                 reviewkey: review._id,
+//                 createdBy: user._id
+//             };
 
-            const question = new Question(testQuestion);
+//             const question = new Question(testQuestion);
 
-            await expect(question.save()).to.be.rejectedWith(Error);
-        });
+//             await expect(question.save()).to.be.rejectedWith(Error);
+//         });
 
-        it('should reject a missing createdBy', async function () {
-            const user = await new User({
-                firstname: "Test",
-                lastname: "Tester",
-                email: "test@test.nl", 
-                password: "secret"
-            });
+//         it('should reject a missing createdBy', async function () {
+//             const user = await new User({
+//                 firstname: "Test",
+//                 lastname: "Tester",
+//                 email: "test@test.nl", 
+//                 password: "secret"
+//             });
 
-            const review = await new Review({
-                createdBy: user._id, 
-                title: 'Hoe testerig ben ik?',
-                open: true,
-            });
+//             const review = await new Review({
+//                 createdBy: user._id, 
+//                 title: 'Hoe testerig ben ik?',
+//                 open: true,
+//             });
 
-            const testQuestion = {
-                reviewkey: review._id,
-                type: "open"
-            };
+//             const testQuestion = {
+//                 reviewkey: review._id,
+//                 type: "open"
+//             };
 
-            const question = new Question(testQuestion);
+//             const question = new Question(testQuestion);
 
-            await expect(question.save()).to.be.rejectedWith(Error);
-        });
-    });
-});
+//             await expect(question.save()).to.be.rejectedWith(Error);
+//         });
+//     });
+// });

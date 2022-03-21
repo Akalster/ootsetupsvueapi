@@ -4,22 +4,15 @@ const Schema = mongoose.Schema
 const getModel = require('./model_cache')
 
 const UserSchema = new Schema({
-    // a user needs to have a name
-    firstname: {
+    username: {
         type: String,
-        required: [true, 'A user needs to have a firstname.'],
-      
-    },
-
-    lastname: { 
-        type: String,
-        required: [true, 'A user needs to have a lastname.'],
-       
+        required: [true, 'A user needs to have a username.'],
+        unique: [true, 'A user needs to have a unique username']
     }, 
 
-    team: { 
-        type: Schema.Types.ObjectId,
-        ref: 'team'
+    password: { 
+        type: String,
+        required: [true, 'A user needs to have a password.'],
     }, 
     
     email: { 
@@ -28,10 +21,14 @@ const UserSchema = new Schema({
         unique: [true, 'A user needs to have a unique email'],
     }, 
 
-    password: { 
-        type: String,
-        required: [true, 'A user needs to have a password.'],
-    }, 
+    birthDate: {
+        type: Date,
+        required: [true, 'A user needs a birthdate.'],
+        validate: {
+            validator: (birthDate) => birthDate <= new Date(),
+            message: 'A user cannot be made in the future.'
+        }
+    },
 
     token: {
         type: String

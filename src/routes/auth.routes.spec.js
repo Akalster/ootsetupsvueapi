@@ -10,10 +10,10 @@ describe('authentication endpoints', function() {
     describe('integration tests', function() {
         it('(POST /register) should create a new user', async function() {
             const testUser = {
-                firstname: "Test",
-                lastname: "Tester",
+                username: "Test",
+                password: "secret",
                 email: "test@test.nl", 
-                password: "secret"
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
             
             const res = await requester.post('/api/register').send(testUser)
@@ -21,18 +21,17 @@ describe('authentication endpoints', function() {
             expect(res.body).to.have.property('_id')
     
             const user = await User.findOne({email: testUser.email})
-            expect(user).to.have.property('firstname', testUser.firstname)
-            expect(user).to.have.property('lastname', testUser.lastname)
-            expect(user).to.have.property('team', testUser.team)
+            expect(user).to.have.property('username', testUser.username)
             expect(user).to.have.property('email', testUser.email)
+            expect(user).to.have.property('birthDate')
             
         })
 
-        it('(POST /register) should not create a user without a firstname', async function() {
+        it('(POST /register) should not create a user without a username', async function() {
             const testUser = {
-                lastname: "Tester",
-                email: "test@test.nl",
-                password: "secret"
+                password: "secret",
+                email: "test@test.nl", 
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
 
             const res = await requester.post('/api/register').send(testUser)
@@ -43,11 +42,11 @@ describe('authentication endpoints', function() {
             expect(docCount).to.equal(0)
         })
         
-        it('(POST /register) should not create a user without a lastname', async function() {
+        it('(POST /register) should not create a user without a email', async function() {
             const testUser = {
-                firstname: "Test",  
-                email: "test@test.nl",
-                password: "secret"
+                username: "Test",
+                password: "secret",
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
 
             const res = await requester.post('/api/register').send(testUser)
@@ -58,11 +57,11 @@ describe('authentication endpoints', function() {
             expect(docCount).to.equal(0)
         })
 
-        it('(POST /register) should not create a user without a email', async function() {
+        it('(POST /register) should not create a user without a birthDate', async function() {
             const testUser = {
-                firstname: "Test",
-                lastname: "Tester", 
-                password: "secret"
+                username: "Test",
+                password: "secret",
+                email: "test@test.nl"
             }
 
             const res = await requester.post('/api/register').send(testUser)
@@ -75,9 +74,9 @@ describe('authentication endpoints', function() {
 
         it('(POST /register) should not create a user without a password', async function() {
             const testUser = {
-                firstname: "Test",
-                lastname: "Tester",
-                email: "test@test.nl"
+                username: "Test",
+                email: "test@test.nl",
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
 
             const res = await requester.post('/api/register').send(testUser)
@@ -91,10 +90,10 @@ describe('authentication endpoints', function() {
 
         it('(POST /login) should login user if there is a account', async function() {
             const testUser = {
-                firstname: "Test",
-                lastname: "Tester",
+                username: "Test",
+                password: "secret",
                 email: "test@test.nl", 
-                password: "secret"
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
     
             const res = await requester.post('/api/register').send(testUser)
@@ -102,8 +101,8 @@ describe('authentication endpoints', function() {
             expect(res.body).to.have.property('_id')
     
             const user = await User.findOne({email: testUser.email})
-            expect(user).to.have.property('firstname', testUser.firstname)
-            expect(user).to.have.property('lastname', testUser.lastname)
+            expect(user).to.have.property('username', testUser.username)
+            expect(user).to.have.property('birthDate')
             expect(user).to.have.property('email', testUser.email)
             
             const res1 = await requester.post("/api/login").send({
@@ -117,10 +116,10 @@ describe('authentication endpoints', function() {
 
         it('(POST /login) should fail is user logs in with wrong password', async function() {
             const testUser = {
-                firstname: "Test",
-                lastname: "Tester",
+                username: "Test",
+                password: "secret",
                 email: "test@test.nl", 
-                password: "secret"
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
     
             const res = await requester.post('/api/register').send(testUser)
@@ -128,24 +127,24 @@ describe('authentication endpoints', function() {
             expect(res.body).to.have.property('_id')
     
             const user = await User.findOne({email: testUser.email})
-            expect(user).to.have.property('firstname', testUser.firstname)
-            expect(user).to.have.property('lastname', testUser.lastname)
+            expect(user).to.have.property('username', testUser.username)
+            expect(user).to.have.property('birthDate')
             expect(user).to.have.property('email', testUser.email)
             
             const res1 = await requester.post("/api/login").send({
                 email: "test@test.nl",
-                password: "garbage"
+                password: "wrong"
             });
 
             expect(res1).to.have.status(404)
         })
 
-        it('(POST /login) should fail is user logs in with wrong email', async function() {
+        it('(POST /login) should fail is user logs in with wrong password', async function() {
             const testUser = {
-                firstname: "Test",
-                lastname: "Tester",
+                username: "Test",
+                password: "secret",
                 email: "test@test.nl", 
-                password: "secret"
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
     
             const res = await requester.post('/api/register').send(testUser)
@@ -153,13 +152,13 @@ describe('authentication endpoints', function() {
             expect(res.body).to.have.property('_id')
     
             const user = await User.findOne({email: testUser.email})
-            expect(user).to.have.property('firstname', testUser.firstname)
-            expect(user).to.have.property('lastname', testUser.lastname)
+            expect(user).to.have.property('username', testUser.username)
+            expect(user).to.have.property('birthDate')
             expect(user).to.have.property('email', testUser.email)
             
             const res1 = await requester.post("/api/login").send({
-                email: "garbage@test.nl",
-                password: "secret"
+                email: "wrong@wrong.nl",
+                password: "garbage"
             });
 
             expect(res1).to.have.status(404)
@@ -169,10 +168,10 @@ describe('authentication endpoints', function() {
     describe('system tests', function() {
         it('create account; login with account;', async function() {
             const testUser = {
-                firstname: "Test",
-                lastname: "Tester",
+                username: "Test",
+                password: "secret",
                 email: "test@test.nl", 
-                password: "secret"
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
 
             const res1 = await requester.post('/api/register').send(testUser)
@@ -185,10 +184,7 @@ describe('authentication endpoints', function() {
                 password: testUser.password
             })
             expect(res2).to.have.status(201)
-            expect(res2.body).to.have.property('token')
-          
-
-            
+            expect(res2.body).to.have.property('token')  
         })
     })
 })

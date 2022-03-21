@@ -10,25 +10,25 @@ describe('user model', function() {
     describe('unit tests', function() {
         it('should create an user', async function() {
             const testUser = {
-                firstname: "Test",
-                lastname: "Tester",
+                username: "Test",
+                password: "secret",
                 email: "test@test.nl", 
-                password: "secret"
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
 
             const user = await new User(testUser).save()
     
-            expect(user).to.have.property('firstname', testUser.firstname)
-            expect(user).to.have.property('lastname', testUser.lastname)
-            expect(user).to.have.property('email', testUser.email)
+            expect(user).to.have.property('username', testUser.username)
             expect(user).to.have.property('password', testUser.password)
+            expect(user).to.have.property('email', testUser.email)
+            expect(user).to.have.property('birthDate')
         })
 
-        it('should reject a missing user firstname', async function() {
+        it('should reject a missing user username', async function() {
             const testUser = {
-                lastname: "Tester",
+                password: "secret",
                 email: "test@test.nl", 
-                password: "secret"
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
             
             const user = new User(testUser)
@@ -36,11 +36,11 @@ describe('user model', function() {
             await expect(user.save()).to.be.rejectedWith(Error)
         })
 
-        it('should reject a missing user lastname', async function() {
+        it('should reject a missing user birthDate', async function() {
             const testUser = {
-                firstname: "Test",
-                email: "test@test.nl", 
-                password: "secret"
+                username: "Test",
+                password: "secret",
+                email: "test@test.nl"
             }
             
             const user = new User(testUser)
@@ -50,9 +50,9 @@ describe('user model', function() {
 
         it('should reject a missing user email', async function() {
             const testUser = {
-                firstname: "Test",
-                lastname: "Tester",
-                password: "secret"
+                username: "Test",
+                password: "secret",
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
             
             const user = new User(testUser)
@@ -62,9 +62,9 @@ describe('user model', function() {
 
         it('should reject a missing user password', async function() {
             const testUser = {
-                firstname: "Test",
-                lastname: "Tester",
-                email: "test@test.nl", 
+                username: "Test",
+                email: "test@test.nl",
+                birthDate: "2012-04-23T18:25:43.511Z" 
             }
             
             const user = new User(testUser)
@@ -72,21 +72,19 @@ describe('user model', function() {
             await expect(user.save()).to.be.rejectedWith(Error)
         })
 
-    
-    
-        it('should not create duplicate emails', async function() {
+        it('should not create duplicate usernames', async function() {
             const testUser1 = {
-                firstname: "Test",
-                lastname: "Tester",
+                username: "Test",
+                password: "secret",
                 email: "test@test.nl", 
-                password: "secret"
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
 
             const testUser2 = {
-                firstname: "Anders",
-                lastname: "Probeerder",
-                email: testUser1.email, 
-                password: "secreter"
+                username: testUser1.username,
+                password: "secret2",
+                email: "test2@test.nl", 
+                birthDate: "2012-04-23T18:25:43.511Z"
             }
 
             await new User(testUser1).save()
@@ -97,6 +95,44 @@ describe('user model', function() {
     
             let count = await User.find().countDocuments()
             expect(count).to.equal(1)
+        })
+    
+        it('should not create duplicate emails', async function() {
+            const testUser1 = {
+                username: "Test",
+                password: "secret",
+                email: "test@test.nl", 
+                birthDate: "2012-04-23T18:25:43.511Z"
+            }
+
+            const testUser2 = {
+                username: "Anders",
+                password: "secret2",
+                email: testUser1.email, 
+                birthDate: "2012-04-23T18:25:43.511Z"
+            }
+
+            await new User(testUser1).save()
+
+            const user = new User(testUser2)
+            
+            await expect(user.save()).to.be.rejectedWith(Error)
+    
+            let count = await User.find().countDocuments()
+            expect(count).to.equal(1)
+        })
+
+        it('should not create a birthDate in the future', async function() {
+            const testUser = {
+                username: "Test",
+                password: "secret",
+                email: "test@test.nl", 
+                birthDate: "2112-04-23T18:25:43.511Z"
+            }
+
+            const user = new User(testUser)
+    
+            await expect(user.save()).to.be.rejectedWith(Error)
         })
     })
 })
