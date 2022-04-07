@@ -26,7 +26,7 @@ const StepSchema = new Schema({
 
     route: {
         type: Schema.Types.ObjectId,
-        ref: "route",
+        ref: 'route',
         required: [true, "A step needs to have a route."]
     },
 

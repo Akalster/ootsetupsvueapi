@@ -42,15 +42,15 @@ GlitchSchema.plugin(require('mongoose-autopopulate'));
 // note: use an anonymous function and not a fat arrow function here!
 // otherwise 'this' does not refer to the correct object
 // use 'next' to indicate that mongoose can go to the next middleware
-GlitchSchema.pre('remove', function(next) {
-    // include the product model here to avoid cyclic inclusion
-    const Step = mongoose.model('Step')
+// GlitchSchema.pre('remove', function(next) {
+//     // include the product model here to avoid cyclic inclusion
+//     const Step = mongoose.model('Step')
 
-    // don't iterate here! we want to use mongo operators!
-    // this makes sure the code executes inside mongo
-    Step.updateMany({}, {$pull: {'steps': {'glitch': this._id}}})
-        .then(() => next())
-})
+//     // don't iterate here! we want to use mongo operators!
+//     // this makes sure the code executes inside mongo
+//     Step.updateMany({}, {$pull: {'steps': {'glitch': this._id}}})
+//         .then(() => next())
+// })
 
 // export the glitch model through a caching function
 module.exports = getModel('Glitch', GlitchSchema)

@@ -3,24 +3,7 @@ const expect = chai.expect
 
 const requester = require('../../requester.spec')
 
-const User = require('../models/user.model')() // note we need to call the model caching function
-
-async function createUser() {
-
-    await requester.post("/api/register").send({
-        username: "Test",
-        password: "secret",
-        email: "test@test.nl", 
-        birthDate: "2012-04-23T18:25:43.511Z"
-    });
-
-    const result = await requester.post("/api/login").send({
-        email: "test@test.nl",
-        password: "secret"
-    });
-
-    return result.body.token;
-}
+const User = require('../models/user.model')()
 
 describe('user endpoints', function() {
     describe('integration tests', function() {
@@ -61,7 +44,7 @@ describe('user endpoints', function() {
 
             const updatedUserResult = await User.findOne({_id: userId}); 
             expect(updatedUserResult).to.have.property('username', updateUser.username)
-            expect(updatedUserResult).to.have.property('birthDate')
+            expect(updatedUserResult.birthDate.toString()).to.equal(new Date('2010-07-05').toString())
             expect(updatedUserResult).to.have.property('email', updateUser.email)
             
         })
@@ -72,7 +55,7 @@ describe('user endpoints', function() {
                 username: "Test",
                 password: "secret",
                 email: "test@test.nl", 
-                birthDate: "2012-04-23T18:25:43.511Z"
+                birthDate: new Date('2010-07-05')
             }
 
             const res = await requester.post('/api/register').send(testUser)
@@ -81,7 +64,7 @@ describe('user endpoints', function() {
     
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('username', testUser.username)
-            expect(user).to.have.property('birthDate')
+            expect(user.birthDate.toString()).to.equal(new Date('2010-07-05').toString())
             expect(user).to.have.property('email', testUser.email)
             
             const result = await requester.post("/api/login").send({
@@ -106,7 +89,7 @@ describe('user endpoints', function() {
                 username: "Test",
                 password: "secret",
                 email: "test@test.nl", 
-                birthDate: "2012-04-23T18:25:43.511Z"
+                birthDate: new Date('2010-07-05')
             }
 
             const res = await requester.post('/api/register').send(testUser)
@@ -115,7 +98,7 @@ describe('user endpoints', function() {
     
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('username', testUser.username)
-            expect(user).to.have.property('birthDate')
+            expect(user.birthDate.toString()).to.equal(new Date('2010-07-05').toString())
             expect(user).to.have.property('email', testUser.email)
             
             const result = await requester.post("/api/login").send({
@@ -136,7 +119,7 @@ describe('user endpoints', function() {
                 username: "Test",
                 password: "secret",
                 email: "test@test.nl", 
-                birthDate: "2012-04-23T18:25:43.511Z"
+                birthDate: new Date('2010-07-05')
             }
 
             const res = await requester.post('/api/register').send(testUser)
@@ -145,7 +128,7 @@ describe('user endpoints', function() {
     
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('username', testUser.username)
-            expect(user).to.have.property('birthDate')
+            expect(user.birthDate.toString()).to.equal(new Date('2010-07-05').toString())
             expect(user).to.have.property('email', testUser.email)
             
             const result = await requester.post("/api/login").send({
