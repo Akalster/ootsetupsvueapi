@@ -2,6 +2,7 @@
 require('dotenv').config();
 
 const localconnect = require('./connect');
+const neo = require('./neo');
 
 //IMPORT MODELS HERE
 
@@ -12,8 +13,14 @@ const Step = require('./src/models/step.model')();
 
 // connect to the databases
 localconnect.mongo(process.env.MONGO_TEST_DB);
+localconnect.neo(process.env.NEO4J_TEST_DB);
 
 beforeEach(async () => {
     // drop both collections before each test
     await Promise.all([User.deleteMany(), Glitch.deleteMany(), Route.deleteMany(), Step.deleteMany()]);
+
+    // clear neo db before each test
+    const session = neo.session();
+    await session.run(neo.dropAll);
+    await session.close();
 });

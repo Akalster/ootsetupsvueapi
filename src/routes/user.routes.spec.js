@@ -29,13 +29,13 @@ describe('user endpoints', function() {
                 username: "Test",
                 password: "secret",
                 email: "test@test.nl", 
-                birthDate: "2012-04-23T18:25:43.511Z"
+                birthDate: new Date('2010-07-05')
             }
 
             const updateUser = {
                 username: "Test",
                 email: "test@test.nl", 
-                birthDate: "2012-04-23T18:25:43.511Z"
+                birthDate: new Date('2010-07-05')
             }
     
             const res = await requester.post('/api/register').send(testUser)
@@ -44,7 +44,7 @@ describe('user endpoints', function() {
     
             const user = await User.findOne({email: testUser.email})
             expect(user).to.have.property('username', testUser.username)
-            expect(user).to.have.property('birthDate')
+            expect(user.birthDate.toString()).to.equal(new Date('2010-07-05').toString())
             expect(user).to.have.property('email', testUser.email)
             
             const result = await requester.post("/api/login").send({
