@@ -38,6 +38,7 @@ describe('step model', function () {
             const step = new Step({
                 stepnumber: 1,
                 description: "First test step",
+                optional: true,
                 glitch: glitch._id,
                 route: route._id,
                 createdBy: user._id
@@ -50,7 +51,8 @@ describe('step model', function () {
 
             const testStep = new Step({
                 stepnumber: 1,
-                description: "First test step"
+                description: "First test step",
+                optional: true,
             });
 
             const step = new Step(testStep);
@@ -61,7 +63,8 @@ describe('step model', function () {
         it('should reject a missing step stepnumber', async function () {
             
             const testStep = {
-                description: "First test step"
+                description: "First test step",
+                optional: true,
             };
 
             const step = new Step(testStep);
@@ -72,7 +75,8 @@ describe('step model', function () {
         it('should reject a missing step description', async function () {
             
             const testStep = {
-                stepnumber: 1
+                stepnumber: 1,
+                optional: true,
             };
 
             const step = new Step(testStep);
@@ -84,7 +88,20 @@ describe('step model', function () {
             
             const testStep = {
                 stepnumber: -5,
-                description: "First test step"
+                description: "First test step",
+                optional: true,
+            };
+
+            const step = new Step(testStep);
+
+            await expect(step.save()).to.be.rejectedWith(Error);
+        });
+
+        it('should reject a missing step optional boolean', async function () {
+            
+            const testStep = {
+                stepnumber: 1,
+                description: "First test step",
             };
 
             const step = new Step(testStep);

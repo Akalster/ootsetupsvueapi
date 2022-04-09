@@ -21,6 +21,7 @@ describe('route model', function () {
             const route = new Route({
                 title: "Test%",
                 description: "Testing if routes work correctly",
+                current: true,
                 publishDate: "2014-11-21T13:44:56.511Z",
                 createdBy: user._id
             });
@@ -32,7 +33,8 @@ describe('route model', function () {
             
             const testRoute = {
                 description: "Testing if routes work correctly",
-                publishDate: "2014-11-21T13:44:56.511Z"
+                publishDate: "2014-11-21T13:44:56.511Z",
+                current: true,
             };
 
             const route = new Route(testRoute);
@@ -44,7 +46,8 @@ describe('route model', function () {
             
             const testRoute = {
                 title: "Test%",
-                publishDate: "2014-11-21T13:44:56.511Z"
+                publishDate: "2014-11-21T13:44:56.511Z",
+                current: true,
             };
 
             const route = new Route(testRoute);
@@ -56,7 +59,8 @@ describe('route model', function () {
             
             const testRoute = {
                 title: "Test%",
-                description: "Testing if routes work correctly"
+                description: "Testing if routes work correctly",
+                current: true,
             };
 
             const route = new Route(testRoute);
@@ -69,7 +73,21 @@ describe('route model', function () {
             const testRoute = {
                 title: "Test%",
                 description: "Testing if routes work correctly",
-                publishDate: "2114-11-21T13:44:56.511Z"
+                publishDate: "2114-11-21T13:44:56.511Z",
+                current: true,
+            };
+
+            const route = new Route(testRoute);
+
+            await expect(route.save()).to.be.rejectedWith(Error);
+        });
+
+        it('should reject a missing route current boolean', async function () {
+            
+            const testRoute = {
+                title: "Test%",
+                description: "Testing if routes work correctly",
+                publishDate: "2014-11-21T13:44:56.511Z",
             };
 
             const route = new Route(testRoute);

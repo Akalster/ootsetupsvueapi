@@ -15,6 +15,10 @@ const RouteSchema = new Schema({
         type: String,
         required: [true, 'A route needs a description.']
     },
+    current: {
+        type: Boolean,
+        required: [true, 'A route needs to have current boolean.']
+    },
     publishDate: {
         type: Date,
         required: [true, 'A route needs a date.'],

@@ -24,6 +24,10 @@ async function follows(req, res) {
     await getFollows(neo.follows, req, res);
 }
 
+async function followdeep(req, res) {
+    await getFollows(neo.followdeep, req, res);
+}
+
 async function follow(req, res) {
 
     const user = await User.findById(req.user.id);
@@ -53,7 +57,38 @@ async function follow(req, res) {
     
 }
 
+async function unfollow(req, res) {
+
+    const user = await User.findById(req.user.id);
+
+    if(!user) {
+        throw new errors.EntityNotFoundError(`Current user ${req.user.id} not found`);
+    }
+
+    const followedUser = await User.findById(req.params.id);
+
+    if(!followedUser) {
+        throw new errors.EntityNotFoundError(`User with id ${req.params.id} not found`);
+    }
+
+    console.log(user._id + ' is trying to unfollow ' + followedUser._id);
+
+    const session = neo.session();
+
+    await session.run(neo.unfollow, {
+        user2Id: followedUser._id.toString(),
+        user1Id: user._id.toString(),
+    });
+
+    session.close();
+
+    res.status(201).end();
+
+}
+
 module.exports = {
     follows,
     follow,
+    unfollow,
+    followdeep,
 }

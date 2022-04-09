@@ -37,6 +37,7 @@ describe('step endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
             const routeRes = await requester.post("/api/route").set({ Authorization: `Bearer ${jwt}` }).send(testRoute);
@@ -46,6 +47,7 @@ describe('step endpoints', function() {
             const testStep = {
                 stepnumber: "1",
                 description: "Perform DoT skip",
+                optional: true,
                 glitch: `${glitch._id}`,
                 route: `${route._id}`
             }
@@ -88,6 +90,7 @@ describe('step endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
             const routeRes = await requester.post("/api/route").set({ Authorization: `Bearer ${jwt}` }).send(testRoute);
@@ -97,6 +100,7 @@ describe('step endpoints', function() {
             const testStep = {
                 stepnumber: "1",
                 description: "Perform DoT skip",
+                optional: true,
                 glitch: `${glitch._id}`,
                 route: `${route._id}`
             }
@@ -163,6 +167,7 @@ describe('step endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
             const routeRes = await requester.post("/api/route").set({ Authorization: `Bearer ${jwt}` }).send(testRoute);
@@ -172,6 +177,7 @@ describe('step endpoints', function() {
             const testStep = {
                 stepnumber: "1",
                 description: "Perform DoT skip",
+                optional: true,
                 glitch: `${glitch._id}`,
                 route: `${route._id}`
             }
@@ -225,6 +231,7 @@ describe('step endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
             const routeRes = await requester.post("/api/route").set({ Authorization: `Bearer ${jwt}` }).send(testRoute);
@@ -234,6 +241,7 @@ describe('step endpoints', function() {
             const testStep = {
                 stepnumber: "1",
                 description: "Perform DoT skip",
+                optional: true,
                 glitch: `${glitch._id}`,
                 route: `${route._id}`
             }
@@ -296,6 +304,7 @@ describe('step endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
             const routeRes = await requester.post("/api/route").set({ Authorization: `Bearer ${jwt}` }).send(testRoute);
@@ -305,6 +314,7 @@ describe('step endpoints', function() {
             const testStep = {
                 stepnumber: "1",
                 description: "Perform DoT skip",
+                optional: true,
                 glitch: `${glitch._id}`,
                 route: `${route._id}`
             }
@@ -351,6 +361,7 @@ describe('step endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
             const routeRes = await requester.post("/api/route").set({ Authorization: `Bearer ${jwt}` }).send(testRoute);
@@ -360,6 +371,7 @@ describe('step endpoints', function() {
             const testStep = {
                 stepnumber: "1",
                 description: "Perform DoT skip",
+                optional: true,
                 glitch: `${glitch._id}`,
                 route: `${route._id}`
             }
@@ -406,6 +418,7 @@ describe('step endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
             const routeRes = await requester.post("/api/route").set({ Authorization: `Bearer ${jwt}` }).send(testRoute);
@@ -415,6 +428,7 @@ describe('step endpoints', function() {
             const testStep = {
                 stepnumber: "1",
                 description: "Perform DoT skip",
+                optional: true,
                 glitch: `${glitch._id}`,
                 route: `${route._id}`
             }

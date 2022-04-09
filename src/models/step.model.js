@@ -7,7 +7,7 @@ const getModel = require('./model_cache')
 const StepSchema = new Schema({
     stepnumber: {
         type: Number,
-        required: [true, 'A step needs a name.'],
+        required: [true, 'A step needs a stepunumber.'],
         validate: {
             validator: (stepnumber) => stepnumber > 0,
             message: 'A stepnumber needs to be positive.'
@@ -17,6 +17,11 @@ const StepSchema = new Schema({
     description: {
         type: String,
         required: [true, 'A step needs a description.']
+    },
+
+    optional: {
+        type: Boolean,
+        required: [true, 'A step needs an optional boolean.']
     },
 
     glitch: {

@@ -25,6 +25,7 @@ describe('route endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
             const res = await requester.post("/api/route").set({ Authorization: `Bearer ${jwt}` }).send(testRoute);
@@ -54,6 +55,7 @@ describe('route endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
             const res = await requester.post("/api/route").set({ Authorization: `Bearer ${jwt}` }).send(testRoute);
@@ -106,6 +108,7 @@ describe('route endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
 
@@ -120,6 +123,7 @@ describe('route endpoints', function() {
             const updateTestRoute = {
                 title: "DOT Skip",
                 description: "Skip spiritual stones.",
+                current: true,
                 publishDate: "2014-11-21T13:44:56.511Z",
                 link: "https://www.youtube.com/watch?v=UVWIhdTdnMY"
             }
@@ -147,6 +151,7 @@ describe('route endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
 
@@ -197,6 +202,7 @@ describe('route endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
 
@@ -231,6 +237,7 @@ describe('route endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
 
@@ -265,6 +272,7 @@ describe('route endpoints', function() {
             const testRoute = {
                 title: "Any%",
                 description: "Complete as fast as possible",
+                current: true,
                 publishDate: new Date('2012-07-05')
             }
 

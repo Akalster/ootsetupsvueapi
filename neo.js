@@ -20,5 +20,7 @@ module.exports = {
     session,
     dropAll: 'MATCH (n) DETACH DELETE n',
     follow: 'MERGE (user1:User {id:$user1Id}) MERGE (user2:User {id: $user2Id}) MERGE (user1)-[:FOLLOWS]->(user2)',
-    follows: 'MATCH (user1:User {id:$userId})-[:FOLLOWS]->(user2:User) RETURN collect(DISTINCT user2.id) as userIds'
+    follows: 'MATCH (user1:User {id:$userId})-[:FOLLOWS]->(user2:User) RETURN collect(DISTINCT user2.id) as userIds',
+    unfollow: 'MATCH (user1:User {id:$user1Id})-[r:FOLLOWS]->(user2:User {id: $user2Id}) DELETE r',
+    followdeep: 'MATCH (user1:User {id:$userId})-[:FOLLOWS]->(user2:User)-[:FOLLOWS]->(user3:User) RETURN collect(DISTINCT user3.id) as userIds',
 }
