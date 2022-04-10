@@ -9,7 +9,7 @@ const app = require('./src/app')
 // since mongoose buffers queries till there is a connection
 
 // start the app
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`server is listening on port ${port}`)
 })
